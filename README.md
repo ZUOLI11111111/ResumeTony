@@ -80,8 +80,10 @@ python start_resume_app.py
 ### 命令行选项
 
 - `--help`: 显示帮助信息
-- `--backend-only`: 仅启动后端服务
+- `--backend-only`: 仅启动所有后端服务
 - `--frontend-only`: 仅启动前端服务
+- `--java-backend-only`: 仅启动Java后端服务
+- `--python-backend-only`: 仅启动Python后端服务
 - `--no-browser`: 不自动打开浏览器
 - `--verbose`: 显示详细日志
 
@@ -91,8 +93,14 @@ python start_resume_app.py
 # 启动完整应用
 python start_resume_app.py
 
-# 仅启动后端（用于开发）
+# 仅启动所有后端（用于开发）
 python start_resume_app.py --backend-only
+
+# 仅启动Java后端（用于开发）
+python start_resume_app.py --java-backend-only
+
+# 仅启动Python后端（用于开发）
+python start_resume_app.py --python-backend-only
 
 # 仅启动前端（用于开发）
 python start_resume_app.py --frontend-only

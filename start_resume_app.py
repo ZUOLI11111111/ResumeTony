@@ -59,7 +59,7 @@ HELP_TEXT = f"""
    - 配置文件位置: backend_of_java_for_save/src/main/resources/application.properties
 
 4. {Colors.BOLD}端口冲突问题：{Colors.END}
-   - 检查端口 8080(后端) 和 3000(前端) 是否被其他应用占用
+   - 检查端口 8080(Java后端), 5000(Python后端) 和 3000(前端) 是否被其他应用占用
    - Windows: netstat -ano | findstr 8080
    - Linux/Mac: lsof -i :8080
 
@@ -67,17 +67,26 @@ HELP_TEXT = f"""
    - 手动安装依赖: cd frontend && npm install
    - 更新 npm 缓存: npm cache clean --force
 
+6. {Colors.BOLD}Python后端问题：{Colors.END}
+   - 确保已安装 Python 3.6+ 版本
+   - 检查依赖项: pip install -r backend_of_py_for_mododify/requirements.txt
+   - 如果遇到模块导入错误，可能需要安装额外的依赖
+
 {Colors.BOLD}命令行选项：{Colors.END}
-  --help               显示此帮助信息
-  --backend-only       仅启动后端服务
-  --frontend-only      仅启动前端服务
-  --no-browser         不自动打开浏览器
-  --verbose            显示详细日志
+  --help                 显示此帮助信息
+  --backend-only         仅启动所有后端服务
+  --frontend-only        仅启动前端服务
+  --java-backend-only    仅启动Java后端服务
+  --python-backend-only  仅启动Python后端服务
+  --no-browser           不自动打开浏览器
+  --verbose              显示详细日志
 
 {Colors.BOLD}使用示例：{Colors.END}
-  python start_resume_app.py             # 正常启动所有服务
-  python start_resume_app.py --help      # 显示帮助信息
-  python start_resume_app.py --backend-only  # 仅启动后端
+  python start_resume_app.py               # 正常启动所有服务
+  python start_resume_app.py --help        # 显示帮助信息
+  python start_resume_app.py --backend-only    # 仅启动后端服务
+  python start_resume_app.py --java-backend-only   # 仅启动Java后端
+  python start_resume_app.py --python-backend-only # 仅启动Python后端
 """
 
 # 进度条类
@@ -117,15 +126,19 @@ class ResumeAppService:
         self.project_root = Path(__file__).parent.absolute()
         self.frontend_dir = self.project_root / 'frontend'
         self.java_backend_dir = self.project_root / 'backend_of_java_for_save'
+        self.python_backend_dir = self.project_root / 'backend_of_py_for_mododify'
         
         self.java_process = None
         self.frontend_process = None
+        self.python_process = None
         self.processes = []
         
         # 设置选项
         self.options = options or {}
         self.backend_only = self.options.get('backend_only', False)
         self.frontend_only = self.options.get('frontend_only', False)
+        self.java_backend_only = self.options.get('java_backend_only', False)
+        self.python_backend_only = self.options.get('python_backend_only', False)
         self.open_browser_flag = not self.options.get('no_browser', False)
         self.verbose = self.options.get('verbose', False)
         
@@ -155,7 +168,7 @@ class ResumeAppService:
         self.print_section("环境检查")
         
         # 创建进度条
-        progress = ProgressBar(total=6, prefix='检查进度:', suffix='完成', length=30)
+        progress = ProgressBar(total=7, prefix='检查进度:', suffix='完成', length=30)
         
         # 检查Java是否已安装
         try:
@@ -233,6 +246,15 @@ class ResumeAppService:
             print(f"{Colors.RED}✗ Java后端目录不存在: {Colors.END}{self.java_backend_dir}")
             return False
             
+        # 检查Python后端目录是否存在
+        if self.python_backend_dir.exists():
+            progress.print()
+            print(f"{Colors.GREEN}✓ Python后端目录已找到: {Colors.END}{self.python_backend_dir}")
+        else:
+            progress.print()
+            print(f"{Colors.RED}✗ Python后端目录不存在: {Colors.END}{self.python_backend_dir}")
+            return False
+            
         print(f"\n{Colors.GREEN}所有先决条件检查通过！{Colors.END}\n")
         return True
     
@@ -240,7 +262,7 @@ class ResumeAppService:
         """检查需要的端口是否可用"""
         self.print_section("端口检查")
         
-        ports_to_check = [8080, 3000]  # Java后端和React前端端口
+        ports_to_check = [8080, 3000, 5000]  # Java后端, React前端, Python后端端口
         all_available = True
         
         for port in ports_to_check:
@@ -382,6 +404,85 @@ class ResumeAppService:
             print(f"\n{Colors.RED}✗ 启动前端时出错: {e}{Colors.END}")
             return False
     
+    def start_python_backend(self):
+        """启动Python后端服务"""
+        self.print_section("启动Python后端")
+        
+        os.chdir(self.python_backend_dir)
+        
+        # 检查是否存在虚拟环境，如果不存在则创建
+        venv_dir = 'venv'
+        has_venv = os.path.exists(venv_dir)
+        
+        if not has_venv and not self.is_windows:
+            print(f"{Colors.CYAN}未找到虚拟环境，正在创建...{Colors.END}")
+            try:
+                subprocess.run(['python3', '-m', 'venv', venv_dir], 
+                              stdout=subprocess.PIPE, 
+                              stderr=subprocess.PIPE, 
+                              check=True)
+                has_venv = True
+                print(f"{Colors.GREEN}✓ 虚拟环境创建成功{Colors.END}")
+            except subprocess.CalledProcessError as e:
+                print(f"{Colors.YELLOW}! 虚拟环境创建失败: {e}{Colors.END}")
+        
+        # 检查依赖项是否已安装
+        requirements_file = Path('requirements.txt')
+        if requirements_file.exists():
+            print(f"{Colors.CYAN}检查Python依赖项...{Colors.END}")
+            pip_cmd = os.path.join(venv_dir, 'bin', 'pip') if has_venv and not self.is_windows else 'pip'
+            pip_cmd = os.path.join(venv_dir, 'Scripts', 'pip') if has_venv and self.is_windows else pip_cmd
+            
+            try:
+                subprocess.run([pip_cmd, 'install', '-r', 'requirements.txt'], 
+                              stdout=subprocess.PIPE, 
+                              stderr=subprocess.PIPE, 
+                              check=True)
+                print(f"{Colors.GREEN}✓ Python依赖项已安装{Colors.END}")
+            except subprocess.CalledProcessError as e:
+                print(f"{Colors.YELLOW}! Python依赖项安装失败: {e}{Colors.END}")
+                print(f"{Colors.YELLOW}尝试继续启动，但可能会遇到问题{Colors.END}")
+        else:
+            print(f"{Colors.YELLOW}! 未找到requirements.txt文件，跳过依赖安装{Colors.END}")
+        
+        # 启动Python后端
+        print(f"{Colors.CYAN}正在启动Python后端服务...{Colors.END}")
+        
+        python_cmd = os.path.join(venv_dir, 'bin', 'python') if has_venv and not self.is_windows else 'python'
+        python_cmd = os.path.join(venv_dir, 'Scripts', 'python') if has_venv and self.is_windows else python_cmd
+        
+        try:
+            self.python_process = subprocess.Popen([python_cmd, 'app.py'], 
+                                                  stdout=subprocess.PIPE,
+                                                  stderr=subprocess.PIPE,
+                                                  text=True)
+            self.processes.append(self.python_process)
+            
+            # 等待服务启动
+            print(f"{Colors.CYAN}等待Python后端启动...{Colors.END}")
+            progress = ProgressBar(total=30, prefix='启动进度:', suffix='检查中', length=30)
+            
+            for i in range(30):
+                progress.print()
+                if self.check_port(5000):  # 假设Python Flask后端在5000端口
+                    break
+                time.sleep(1)
+                
+            if self.check_port(5000):
+                print(f"\n{Colors.GREEN}✓ Python后端已成功启动在端口 5000{Colors.END}")
+                return True
+            else:
+                print(f"\n{Colors.RED}✗ Python后端启动失败或超时{Colors.END}")
+                # 检查是否有错误输出
+                if self.python_process.stderr:
+                    error_output = self.python_process.stderr.read(1024)  # 读取前1024个字符的错误
+                    if error_output:
+                        print(f"{Colors.RED}错误信息: {error_output}{Colors.END}")
+                return False
+        except Exception as e:
+            print(f"\n{Colors.RED}✗ 启动Python后端时出错: {e}{Colors.END}")
+            return False
+
     def open_browser(self):
         """在浏览器中打开应用"""
         print(f"\n{Colors.CYAN}在浏览器中打开应用...{Colors.END}")
@@ -456,19 +557,30 @@ class ResumeAppService:
                 return
             
             # 根据选项启动服务
-            backend_started = False
+            java_backend_started = False
+            python_backend_started = False
             frontend_started = False
             
-            # 启动后端服务（除非仅指定前端）
-            if not self.frontend_only:
-                backend_started = self.start_java_backend()
-                if not backend_started:
+            # 启动Java后端服务（除非仅指定前端或Python后端）
+            if not self.frontend_only and not self.python_backend_only:
+                java_backend_started = self.start_java_backend()
+                if not java_backend_started:
                     print(f"{Colors.RED}Java后端启动失败，无法继续。{Colors.END}")
-                    self.cleanup()
-                    return
+                    if not self.java_backend_only:  # 如果不是仅Java后端模式，就清理
+                        self.cleanup()
+                        return
+            
+            # 启动Python后端服务（除非仅指定前端或Java后端）
+            if not self.frontend_only and not self.java_backend_only:
+                python_backend_started = self.start_python_backend()
+                if not python_backend_started:
+                    print(f"{Colors.RED}Python后端启动失败。{Colors.END}")
+                    if not self.python_backend_only:  # 如果不是仅Python后端模式，就清理
+                        self.cleanup()
+                        return
             
             # 启动前端服务（除非仅指定后端）
-            if not self.backend_only:
+            if not self.backend_only and not self.java_backend_only and not self.python_backend_only:
                 frontend_started = self.start_frontend()
                 if not frontend_started:
                     print(f"{Colors.RED}前端启动失败。{Colors.END}")
@@ -478,8 +590,10 @@ class ResumeAppService:
             
             # 显示成功信息
             started_services = []
-            if backend_started:
+            if java_backend_started:
                 started_services.append("Java后端(端口8080)")
+            if python_backend_started:
+                started_services.append("Python后端(端口5000)")
             if frontend_started:
                 started_services.append("React前端(端口3000)")
                 
@@ -489,8 +603,10 @@ class ResumeAppService:
                 # 显示访问地址
                 if frontend_started:
                     print(f"{Colors.CYAN}应用访问地址: http://localhost:3000{Colors.END}")
-                elif backend_started:
+                elif java_backend_started:
                     print(f"{Colors.CYAN}后端API地址: http://localhost:8080/api{Colors.END}")
+                elif python_backend_started:
+                    print(f"{Colors.CYAN}Python后端地址: http://localhost:5000{Colors.END}")
                 
                 # 自动打开浏览器（如果启动了前端且未禁用）
                 if frontend_started and self.open_browser_flag:
@@ -523,6 +639,8 @@ if __name__ == "__main__":
     parser.add_argument('--help', action='store_true', help='显示帮助信息')
     parser.add_argument('--backend-only', action='store_true', help='仅启动后端服务')
     parser.add_argument('--frontend-only', action='store_true', help='仅启动前端服务')
+    parser.add_argument('--java-backend-only', action='store_true', help='仅启动Java后端服务')
+    parser.add_argument('--python-backend-only', action='store_true', help='仅启动Python后端服务')
     parser.add_argument('--no-browser', action='store_true', help='不自动打开浏览器')
     parser.add_argument('--verbose', action='store_true', help='显示详细日志')
     
@@ -535,14 +653,16 @@ if __name__ == "__main__":
         sys.exit(0)
     
     # 检查互斥选项
-    if args.backend_only and args.frontend_only:
-        print(f"{Colors.RED}错误: --backend-only 和 --frontend-only 选项不能同时使用{Colors.END}")
+    if sum([args.backend_only, args.frontend_only, args.java_backend_only, args.python_backend_only]) > 1:
+        print(f"{Colors.RED}错误: --backend-only, --frontend-only, --java-backend-only, --python-backend-only 选项不能同时使用{Colors.END}")
         sys.exit(1)
     
     # 启动应用
     options = {
         'backend_only': args.backend_only,
         'frontend_only': args.frontend_only,
+        'java_backend_only': args.java_backend_only,
+        'python_backend_only': args.python_backend_only,
         'no_browser': args.no_browser,
         'verbose': args.verbose
     }
