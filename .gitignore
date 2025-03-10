@@ -21,6 +21,7 @@ wheels/
 *.egg
 venv/
 env/
+backend_of_py_for_mododify/venv/
 
 # Java
 *.class
@@ -33,10 +34,23 @@ env/
 *.tar.gz
 *.rar
 hs_err_pid*
+backend_of_java_for_save/target/
+backend_of_java_for_save/.mvn/
+backend_of_java_for_save/mvnw
+backend_of_java_for_save/mvnw.cmd
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-.DS_Store 
+.DS_Store
+
+# 大型数据文件
+*.db
+*.sqlite
+*.sqlite3
+*.hdf5
+*.h5
+*.bin
+*.model 

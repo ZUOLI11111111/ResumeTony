@@ -1,8 +1,0 @@
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/service/ResumeResultService.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/config/CorsConfig.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/config/MybatisPlusConfig.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/entity/ResumeResult.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/mapper/ResumeResultMapper.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/service/impl/ResumeResultServiceImpl.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/ResumeApplication.java
-/home/m/resume_revision/backend_of_java_for_save/src/main/java/com/resume/controller/ResumeResultController.java
