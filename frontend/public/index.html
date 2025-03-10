@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>简历修改应用</title>
+    <style>
+      /* 隐藏React错误覆盖层 */
+      body > div:first-child[style*="background"] {
+        display: none !important;
+      }
+    </style>
+    <script>
+      // 自动移除React错误覆盖层
+      (function removeReactErrorOverlay() {
+        if (typeof window !== 'undefined') {
+          const targetNode = document.body;
+          const config = { childList: true, subtree: true };
+          
+          const callback = function(mutationsList, observer) {
+            for (const mutation of mutationsList) {
+              if (mutation.type === 'childList' && mutation.addedNodes.length) {
+                for (const node of mutation.addedNodes) {
+                  if (node.nodeType === 1 && 
+                      node.textContent.includes('Uncaught runtime errors') && 
+                      node.style && 
+                      node.style.backgroundColor) {
+                    node.remove();
+                  }
+                }
+              }
+            }
+          };
+          
+          const observer = new MutationObserver(callback);
+          observer.observe(targetNode, config);
+          
+          // 立即执行一次
+          const errorOverlay = document.querySelector('body > div:first-child');
+          if (errorOverlay && errorOverlay.textContent.includes('Uncaught runtime errors')) {
+            errorOverlay.remove();
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>您需要启用 JavaScript 来运行此应用。</noscript>
+    <div id="root"></div>
+  </body>
+</html> 

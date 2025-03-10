@@ -1,0 +1,82 @@
+.app-container {
+    text-align: center;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    max-width: 100% !important;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.button {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    background: linear-gradient(145deg, #a9a9a9, #888888);
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    font-size: 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+button.active {
+    background: linear-gradient(145deg, #5bc0de, #46b8da);
+    box-shadow: 0 3px 8px rgba(91, 192, 222, 0.3);
+}
+
+button:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+button.active:hover {
+    background: linear-gradient(145deg, #46b8da, #5bc0de);
+    box-shadow: 0 5px 12px rgba(91, 192, 222, 0.4);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button.active:active {
+    box-shadow: 0 2px 4px rgba(91, 192, 222, 0.3);
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    position: relative;
+    display: inline-block;
+}
+
+h1:after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #5bc0de, transparent);
+    bottom: -8px;
+    left: 20%;
+}
+
+p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 16px;
+}

@@ -1,0 +1,8 @@
+com/resume/mapper/ResumeResultMapper.class
+com/resume/controller/ResumeResultController.class
+com/resume/config/CorsConfig.class
+com/resume/ResumeApplication.class
+com/resume/service/impl/ResumeResultServiceImpl.class
+com/resume/config/MybatisPlusConfig.class
+com/resume/entity/ResumeResult.class
+com/resume/service/ResumeResultService.class

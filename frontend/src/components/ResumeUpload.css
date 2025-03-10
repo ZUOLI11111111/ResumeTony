@@ -1,0 +1,344 @@
+/* 简历上传组件样式 */
+.resume-upload {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.split-container {
+    display: flex;
+    width: 98%;
+    max-width: 3000px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+}
+
+.input-section {
+    flex: 1;
+    padding-right: 20px;
+    border-right: 1px solid #eee;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.output-section {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.text-input-area {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.resume-text-input {
+    width: 100%;
+    height: 400px;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.resume-text-input:focus {
+    outline: none;
+    border-color: #5bc0de;
+    box-shadow: 0 0 8px rgba(91, 192, 222, 0.3);
+}
+
+.text-output-area {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.resume-text-output {
+    width: 100%;
+    height: 400px;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: none;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+.resume-text-output:focus {
+    outline: none;
+}
+
+.result-display {
+    width: 100%;
+    height: 500px;
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.modified-resume {
+    white-space: pre-wrap;
+}
+
+.placeholder-text {
+    color: #999;
+    text-align: center;
+    margin-top: 230px;
+}
+
+.submit-button {
+    background: linear-gradient(145deg, #5bc0de, #46b8da);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 3px 8px rgba(91, 192, 222, 0.3);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: linear-gradient(145deg, #46b8da, #5bc0de);
+    box-shadow: 0 5px 12px rgba(91, 192, 222, 0.4);
+    transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background: linear-gradient(145deg, #b0b0b0, #d0d0d0);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.input-method-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.method-button {
+    background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+    color: #555;
+    border: none;
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.method-button.active {
+    background: linear-gradient(145deg, #5bc0de, #46b8da);
+    color: white;
+    box-shadow: 0 3px 8px rgba(91, 192, 222, 0.3);
+}
+
+.language-selector {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.language-selector > p {
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: 500;
+}
+
+.language-options {
+    display: flex;
+    gap: 20px;
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.language-option input {
+    margin-right: 8px;
+}
+
+.action-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 修改要求容器 */
+.requirements-container {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.requirements-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #444;
+    font-size: 15px;
+}
+
+.requirements-input {
+    width: 100%;
+    height: 80px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.requirements-input:focus {
+    outline: none;
+    border-color: #5bc0de;
+    box-shadow: 0 0 6px rgba(91, 192, 222, 0.3);
+}
+
+/* 语言选择器相关 */
+.sidebar-language-selector {
+    margin-bottom: 20px;
+}
+
+.center-language-selector {
+    text-align: center;
+}
+
+.section-header {
+    position: relative;
+    text-align: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.top-right-language-selector {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-arrow {
+    font-size: 16px;
+    color: #999;
+    margin: 0 5px;
+}
+
+.language-select-corner {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-select-corner:focus {
+    outline: none;
+    border-color: #5bc0de;
+    box-shadow: 0 0 5px rgba(91, 192, 222, 0.3);
+}
+
+.central-language-selector {
+    margin: 15px 0;
+}
+
+/* 历史按钮 */
+.history-button {
+    margin-top: 15px;
+    background-color: #f0f0f0;
+    color: #555;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.history-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* 成功消息 */
+.success-message {
+    display: flex;
+    align-items: center;
+    background-color: #e6f7ee;
+    color: #2d9064;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.success-icon {
+    font-size: 16px;
+    margin-right: 6px;
+}
+
+.saving-indicator {
+    margin-left: 5px;
+    font-style: italic;
+}
+
+/* 响应式调整 */
+@media (max-width: 1000px) {
+    .split-container {
+        flex-direction: column;
+    }
+    
+    .input-section, .output-section {
+        width: 100%;
+        padding: 0;
+        border: none;
+    }
+    
+    .action-section {
+        flex-direction: row;
+        margin: 20px 0;
+        gap: 15px;
+    }
+    
+    .history-button {
+        margin-top: 0;
+    }
+} 
