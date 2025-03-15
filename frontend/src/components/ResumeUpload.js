@@ -57,7 +57,7 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
             
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
-            
+            let workflow_count = 0;
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
@@ -81,8 +81,12 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
                             setModifiedResume("抱歉，修改过程中出现错误，请稍后再试。");
                         } else if (data.type === 'end') {
                             setSuccess("修改成功！");
+                            workflow_count++;
                             // 修改成功后自动保存到数据库
-                            saveResultToDatabase(resumeText, data.text, modificationRequirements);
+                            if (workflow_count === 2){
+                                //saveResultToDatabase(resumeText, data.text, modificationRequirements);
+                                break;
+                            }
                         }
                     } catch (parseError) {
                         console.error("解析JSON失败:", parseError, match[1]);

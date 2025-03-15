@@ -24,6 +24,8 @@ function ResumeReviewHistoryContent({ onBack }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(null); // 存储要删除的ID
+    const [currentPage, setCurrentPage] = useState(0); // 添加当前页码状态
+    const [totalPages, setTotalPages] = useState(1); // 添加总页数状态
 
     // 全局错误处理
     useEffect(() => {
@@ -65,17 +67,36 @@ function ResumeReviewHistoryContent({ onBack }) {
         setFilteredHistory(filtered);
     }, [searchTerm, resumeHistory]);
 
-    const fetchResumeHistory = async () => {
+    const fetchResumeHistory = async (page = 0) => {
         try {
             setLoading(true);
-            console.log('开始请求历史数据...');
-            const response = await api.get('/resume/page');
+            setError(null); // 清除之前的错误
+            console.log(`开始请求历史数据，页码: ${page}...`);
+            
+            const response = await api.get('/resume/page', {
+                params: {
+                    current: page + 1, // 后端页码从1开始
+                    size: 10
+                },
+                timeout: 15000 // 设置15秒超时
+            });
+            
             console.log('收到响应:', response);
             if (response.data && response.data.success) {
-                const records = response.data.data.records || [];
+                const data = response.data.data;
+                const records = data.records || [];
                 console.log('解析记录:', records);
                 setResumeHistory(records);
                 setFilteredHistory(records);
+                
+                // 更新分页数据
+                setCurrentPage(page);
+                // 计算总页数
+                const total = data.total || 0;
+                const size = data.size || 10;
+                const pages = Math.ceil(total / size);
+                setTotalPages(pages || 1);
+                console.log(`设置分页数据: 当前页=${page}, 总页数=${pages}, 总记录数=${total}`);
             } else {
                 console.error('API返回错误:', response.data);
                 setError(`获取历史记录失败: ${response.data?.message || '未知错误'}`);
@@ -91,6 +112,12 @@ function ResumeReviewHistoryContent({ onBack }) {
             setLoading(false);
         }
     };
+
+    const goToPage = (page) => {
+        if (page >= 0 && page <= totalPages) {
+            fetchResumeHistory(page);
+        }
+    }
 
     // 查看详情
     const viewResumeDetail = async (id) => {
@@ -459,6 +486,27 @@ function ResumeReviewHistoryContent({ onBack }) {
                                                     清除搜索
                                                 </button>
                                             )}
+                                        </div>
+                                    )}
+                                    {filteredHistory.length > 0 && totalPages > 1 && (
+                                        <div className="pagination">
+                                            <button 
+                                                className="pagination-button"
+                                                onClick={() => goToPage(currentPage - 1)}
+                                                disabled={currentPage === 0 || loading}
+                                            >
+                                                上一页
+                                            </button>
+                                            <span className="pagination-info">
+                                                第{currentPage + 1}页 / 共{totalPages}页
+                                            </span>
+                                            <button 
+                                                className="pagination-button"
+                                                onClick={() => goToPage(currentPage + 1)}
+                                                disabled={currentPage >= totalPages - 1 || loading}
+                                            >
+                                                下一页
+                                            </button>
                                         </div>
                                     )}
                                 </div>
