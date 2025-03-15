@@ -116,6 +116,7 @@ public class ResumeResultController {
         response.put("message", "简历结果更新成功");
         response.put("data", updated);
         
+        
         return ResponseEntity.ok(response);
     }
 
