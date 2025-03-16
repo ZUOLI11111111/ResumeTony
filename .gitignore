@@ -53,4 +53,5 @@ backend_of_java_for_save/mvnw.cmd
 *.hdf5
 *.h5
 *.bin
-*.model 
+*.model node_modules/
+venv/
