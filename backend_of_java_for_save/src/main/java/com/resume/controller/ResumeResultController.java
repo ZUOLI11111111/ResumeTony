@@ -87,12 +87,30 @@ public class ResumeResultController {
             @RequestParam(defaultValue = "10") long size,
             @RequestParam(required = false) String userId) {
         
-        Page<ResumeResult> page = new Page<>(current, size);
-        Page<ResumeResult> resultPage = resumeResultService.pageResumeResults(page, userId);
-        
         Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("data", resultPage);
+        
+        try {
+            // 验证参数
+            if (current < 1) {
+                current = 1;
+            }
+            if (size < 1 || size > 100) {
+                size = 10; // 限制每页最大记录数
+            }
+            
+            Page<ResumeResult> page = new Page<>(current, size);
+            Page<ResumeResult> resultPage = resumeResultService.pageResumeResults(page, userId);
+            
+            response.put("success", true);
+            response.put("data", resultPage);
+        } catch (Exception e) {
+            logger.error("分页查询简历结果时发生错误", e);
+            response.put("success", false);
+            response.put("message", "查询失败: " + e.getMessage());
+            // 提供空的分页结果，避免前端解析错误
+            Page<ResumeResult> emptyPage = new Page<>(current, size);
+            response.put("data", emptyPage);
+        }
         
         return ResponseEntity.ok(response);
     }

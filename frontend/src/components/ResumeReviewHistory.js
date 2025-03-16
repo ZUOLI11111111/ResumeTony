@@ -26,6 +26,7 @@ function ResumeReviewHistoryContent({ onBack }) {
     const [confirmDelete, setConfirmDelete] = useState(null); // 存储要删除的ID
     const [currentPage, setCurrentPage] = useState(0); // 添加当前页码状态
     const [totalPages, setTotalPages] = useState(1); // 添加总页数状态
+    const [totalRecords, setTotalRecords] = useState(0); // 添加总记录数状态
 
     // 全局错误处理
     useEffect(() => {
@@ -43,29 +44,51 @@ function ResumeReviewHistoryContent({ onBack }) {
 
     // 获取简历修改历史
     useEffect(() => {
-        fetchResumeHistory();
+        try {
+            fetchResumeHistory();
+        } catch (error) {
+            console.error('获取历史记录失败:', error);
+            setError('无法加载历史记录，请检查后端服务是否正常运行');
+            setLoading(false);
+        }
     }, []);
 
     // 筛选历史记录
     useEffect(() => {
+        // 没有搜索词时，显示当前页的所有记录
         if (!searchTerm.trim()) {
-            setFilteredHistory(resumeHistory);
+            const size = 10;
+            const startIndex = currentPage * size;
+            const endIndex = Math.min(startIndex + size, resumeHistory.length);
+            setFilteredHistory(resumeHistory.slice(startIndex, endIndex));
             return;
         }
         
+        // 有搜索词时，在所有记录中搜索，并显示第一页搜索结果
         const filtered = resumeHistory.filter(resume => {
-            // 在内容和描述中搜索
             const descMatch = resume.modificationDescription && 
-                              resume.modificationDescription.toLowerCase().includes(searchTerm.toLowerCase());
+                            resume.modificationDescription.toLowerCase().includes(searchTerm.toLowerCase());
             const origMatch = resume.originalContent && 
-                             resume.originalContent.toLowerCase().includes(searchTerm.toLowerCase());
+                            resume.originalContent.toLowerCase().includes(searchTerm.toLowerCase());
             const modMatch = resume.modifiedContent && 
                             resume.modifiedContent.toLowerCase().includes(searchTerm.toLowerCase());
             return descMatch || origMatch || modMatch;
         });
         
-        setFilteredHistory(filtered);
-    }, [searchTerm, resumeHistory]);
+        // 在搜索结果中显示第一页
+        const size = 10;
+        const startIndex = 0; // 搜索时始终显示第一页
+        const endIndex = Math.min(startIndex + size, filtered.length);
+        
+        // 只显示第一页的搜索结果
+        setFilteredHistory(filtered.slice(startIndex, endIndex));
+        setCurrentPage(0); // 重置到第一页
+        // 根据搜索结果更新总页数
+        const newTotalPages = Math.ceil(filtered.length / size) || 1;
+        setTotalPages(newTotalPages);
+        
+        console.log(`搜索模式: 找到${filtered.length}条匹配，共${newTotalPages}页，显示第1页`);
+    }, [searchTerm, resumeHistory, currentPage]);
 
     const fetchResumeHistory = async (page = 0) => {
         try {
@@ -73,33 +96,63 @@ function ResumeReviewHistoryContent({ onBack }) {
             setError(null); // 清除之前的错误
             console.log(`开始请求历史数据，页码: ${page}...`);
             
+            // 修改：获取所有数据，然后在前端分页
             const response = await api.get('/resume/page', {
                 params: {
-                    current: page + 1, // 后端页码从1开始
-                    size: 10
+                    current: 1,
+                    size: 1000  // 获取大量数据，实际上是尝试获取所有数据
                 },
                 timeout: 15000 // 设置15秒超时
             });
             
             console.log('收到响应:', response);
             if (response.data && response.data.success) {
-                const data = response.data.data;
-                const records = data.records || [];
-                console.log('解析记录:', records);
-                setResumeHistory(records);
-                setFilteredHistory(records);
-                
-                // 更新分页数据
-                setCurrentPage(page);
-                // 计算总页数
-                const total = data.total || 0;
-                const size = data.size || 10;
-                const pages = Math.ceil(total / size);
-                setTotalPages(pages || 1);
-                console.log(`设置分页数据: 当前页=${page}, 总页数=${pages}, 总记录数=${total}`);
+                try {
+                    const data = response.data.data || {};
+                    const allRecords = data.records || [];
+                    console.log('解析记录:', allRecords.length);
+                    
+                    // 存储所有记录
+                    setResumeHistory(allRecords);
+                    
+                    // 计算分页数据
+                    const total = allRecords.length;
+                    const size = 10; // 前端固定每页10条
+                    const totalPages = Math.ceil(total / size) || 1;
+                    
+                    // 计算当前页的记录
+                    const startIndex = page * size;
+                    const endIndex = Math.min(startIndex + size, total);
+                    const currentPageRecords = allRecords.slice(startIndex, endIndex);
+                    
+                    // 设置当前页的记录
+                    setFilteredHistory(currentPageRecords);
+                    
+                    // 更新分页信息
+                    setCurrentPage(page);
+                    setTotalPages(totalPages);
+                    setTotalRecords(total);
+                    
+                    console.log(`设置分页数据: 当前页=${page}, 总页数=${totalPages}, 总记录数=${total}, 当前页记录数=${currentPageRecords.length}`);
+                } catch (parseError) {
+                    console.error('解析API响应数据出错:', parseError);
+                    setError('解析返回数据时出错，请刷新页面重试');
+                    // 设置默认值以防止UI崩溃
+                    setResumeHistory([]);
+                    setFilteredHistory([]);
+                    setCurrentPage(0);
+                    setTotalPages(1);
+                    setTotalRecords(0);
+                }
             } else {
                 console.error('API返回错误:', response.data);
                 setError(`获取历史记录失败: ${response.data?.message || '未知错误'}`);
+                // 设置默认值
+                setResumeHistory([]);
+                setFilteredHistory([]);
+                setCurrentPage(0);
+                setTotalPages(1);
+                setTotalRecords(0);
             }
         } catch (err) {
             console.error('获取简历历史出错详情:', err.message, err.response || '无响应');
@@ -108,14 +161,50 @@ function ResumeReviewHistoryContent({ onBack }) {
             } else {
                 setError('无法连接到服务器，请稍后再试');
             }
+            // 服务器错误时设置默认值
+            setResumeHistory([]);
+            setFilteredHistory([]);
+            setCurrentPage(0);
+            setTotalPages(1);
+            setTotalRecords(0);
         } finally {
             setLoading(false);
         }
     };
 
     const goToPage = (page) => {
-        if (page >= 0 && page <= totalPages) {
-            fetchResumeHistory(page);
+        if (page >= 0 && page < totalPages) {
+            console.log(`跳转到第${page+1}页`);
+            
+            // 如果有搜索条件，则在搜索结果中分页
+            if (searchTerm.trim()) {
+                // 先对所有数据进行搜索过滤
+                const filtered = resumeHistory.filter(resume => {
+                    const descMatch = resume.modificationDescription && 
+                                    resume.modificationDescription.toLowerCase().includes(searchTerm.toLowerCase());
+                    const origMatch = resume.originalContent && 
+                                    resume.originalContent.toLowerCase().includes(searchTerm.toLowerCase());
+                    const modMatch = resume.modifiedContent && 
+                                    resume.modifiedContent.toLowerCase().includes(searchTerm.toLowerCase());
+                    return descMatch || origMatch || modMatch;
+                });
+                
+                // 然后在过滤结果中分页
+                const size = 10;
+                const startIndex = page * size;
+                const endIndex = Math.min(startIndex + size, filtered.length);
+                setFilteredHistory(filtered.slice(startIndex, endIndex));
+                setCurrentPage(page);
+                console.log(`搜索模式: 显示第${startIndex+1}到第${endIndex}条结果，共${filtered.length}条匹配`);
+            } else {
+                // 在所有记录中分页
+                const size = 10;
+                const startIndex = page * size;
+                const endIndex = Math.min(startIndex + size, resumeHistory.length);
+                setFilteredHistory(resumeHistory.slice(startIndex, endIndex));
+                setCurrentPage(page);
+                console.log(`普通模式: 显示第${startIndex+1}到第${endIndex}条记录，共${resumeHistory.length}条`);
+            }
         }
     }
 
@@ -256,9 +345,22 @@ function ResumeReviewHistoryContent({ onBack }) {
         setSearchTerm(e.target.value);
     };
 
-    // 清除搜索
+    // 清除搜索并重新加载当前页
     const clearSearch = () => {
         setSearchTerm('');
+        
+        // 清除搜索后，重置为第一页
+        const size = 10;
+        const startIndex = 0;
+        const endIndex = Math.min(startIndex + size, resumeHistory.length);
+        setFilteredHistory(resumeHistory.slice(startIndex, endIndex));
+        setCurrentPage(0);
+        
+        // 根据全部记录重新计算总页数
+        const newTotalPages = Math.ceil(resumeHistory.length / size) || 1;
+        setTotalPages(newTotalPages);
+        
+        console.log(`清除搜索: 显示第1页，共${newTotalPages}页，总记录${resumeHistory.length}条`);
     };
 
     // 格式化简历内容，将纯文本转换为结构化的HTML
@@ -365,6 +467,30 @@ function ResumeReviewHistoryContent({ onBack }) {
                                     )}
                                 </div>
                                 
+                                {/* 添加简历分类对话框 */}
+                                <div className="detail-section">
+                                    <h4>简历分类</h4>
+                                    {selectedResume.resumeClassification ? (
+                                        <div className="classification-content">
+                                            <p>{selectedResume.resumeClassification}</p>
+                                        </div>
+                                    ) : (
+                                        <div className="empty-classification">未提供简历分类</div>
+                                    )}
+                                </div>
+                                
+                                {/* 添加具体简历分类对话框 */}
+                                <div className="detail-section">
+                                    <h4>具体分类</h4>
+                                    {selectedResume.modifiedResumeClassification ? (
+                                        <div className="classification-content">
+                                            <p>{selectedResume.modifiedResumeClassification}</p>
+                                        </div>
+                                    ) : (
+                                        <div className="empty-classification">未提供具体分类</div>
+                                    )}
+                                </div>
+                                
                                 <div className="resume-comparison">
                                     <div className="comparison-column">
                                         <div className="comparison-header">原始简历</div>
@@ -406,6 +532,14 @@ function ResumeReviewHistoryContent({ onBack }) {
                             <div className="resume-list">
                                 <p className="dialog-description">您的简历修改记录</p>
                                 
+                                {/* 添加总记录条数显示 */}
+                                <div className="total-records-info">
+                                    总共 {totalRecords} 条记录
+                                    {searchTerm && (
+                                        <span className="filtered-info"> (筛选出 {filteredHistory.length} 条)</span>
+                                    )}
+                                </div>
+                                
                                 {/* 搜索框 */}
                                 <div className="search-container">
                                     <input 
@@ -424,13 +558,6 @@ function ResumeReviewHistoryContent({ onBack }) {
                                         </button>
                                     )}
                                 </div>
-                                
-                                {/* 搜索结果计数 */}
-                                {searchTerm && (
-                                    <div className="search-result-count">
-                                        找到 {filteredHistory.length} 条匹配记录
-                                    </div>
-                                )}
                                 
                                 <div className="history-list">
                                     {filteredHistory.length > 0 ? (
@@ -488,7 +615,7 @@ function ResumeReviewHistoryContent({ onBack }) {
                                             )}
                                         </div>
                                     )}
-                                    {filteredHistory.length > 0 && totalPages > 1 && (
+                                    {filteredHistory.length > 0 ? (
                                         <div className="pagination">
                                             <button 
                                                 className="pagination-button"
@@ -498,7 +625,7 @@ function ResumeReviewHistoryContent({ onBack }) {
                                                 上一页
                                             </button>
                                             <span className="pagination-info">
-                                                第{currentPage + 1}页 / 共{totalPages}页
+                                                第{currentPage + 1}页 / 共{totalPages > 0 ? totalPages : 1}页 (每页10条)
                                             </span>
                                             <button 
                                                 className="pagination-button"
@@ -508,7 +635,7 @@ function ResumeReviewHistoryContent({ onBack }) {
                                                 下一页
                                             </button>
                                         </div>
-                                    )}
+                                    ) : null}
                                 </div>
                             </div>
                         ) : (

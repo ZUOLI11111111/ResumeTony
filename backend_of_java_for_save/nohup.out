@@ -1,0 +1,1045 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 22:55:42.818  INFO 30049 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 30049 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 22:55:42.821  INFO 30049 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 22:55:43.308  INFO 30049 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 22:55:43.317  INFO 30049 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 22:55:43.385  WARN 30049 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 22:55:43.385  WARN 30049 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 22:55:43.680  INFO 30049 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 22:55:43.686  INFO 30049 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 22:55:43.687  INFO 30049 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 22:55:43.732  INFO 30049 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 22:55:43.732  INFO 30049 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 870 ms
+2025-03-16 22:55:43.870  WARN 30049 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 22:55:44.368  INFO 30049 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 22:55:44.587  INFO 30049 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 22:55:44.670  INFO 30049 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 22:55:44.677  INFO 30049 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.167 seconds (JVM running for 2.444)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 22:56:06.843  INFO 30595 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 30595 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 22:56:06.847  INFO 30595 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 22:56:07.333  INFO 30595 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 22:56:07.341  INFO 30595 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 22:56:07.404  WARN 30595 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 22:56:07.404  WARN 30595 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 22:56:07.702  INFO 30595 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 22:56:07.709  INFO 30595 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 22:56:07.709  INFO 30595 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 22:56:07.751  INFO 30595 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 22:56:07.751  INFO 30595 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 864 ms
+2025-03-16 22:56:07.885  WARN 30595 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 22:56:08.364  INFO 30595 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 22:56:08.583  INFO 30595 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 22:56:08.669  INFO 30595 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 22:56:08.678  INFO 30595 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.137 seconds (JVM running for 2.429)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 22:56:23.700  INFO 31028 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 31028 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 22:56:23.705  INFO 31028 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 22:56:24.179  INFO 31028 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 22:56:24.187  INFO 31028 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 22:56:24.252  WARN 31028 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 22:56:24.252  WARN 31028 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 22:56:24.555  INFO 31028 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 22:56:24.561  INFO 31028 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 22:56:24.562  INFO 31028 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 22:56:24.606  INFO 31028 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 22:56:24.606  INFO 31028 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 860 ms
+2025-03-16 22:56:24.756  WARN 31028 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 22:56:25.266  INFO 31028 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 22:56:25.490  INFO 31028 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 22:56:25.570  INFO 31028 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 22:56:25.578  INFO 31028 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.179 seconds (JVM running for 2.461)
+2025-03-16 22:57:32.275  INFO 31028 --- [0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-16 22:57:32.275  INFO 31028 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-16 22:57:32.276  INFO 31028 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-16 22:57:32.337  INFO 31028 --- [0.0-8080-exec-1] c.r.controller.ResumeResultController    : 接收到保存简历请求，内容长度：original=1, modified=1269
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47908b2f]
+JDBC Connection [HikariProxyConnection@733848127 wrapping com.mysql.cj.jdbc.ConnectionImpl@281a5add] will be managed by Spring
+==>  Preparing: INSERT INTO resume_result ( original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: o(String), ---
+
+**个人简历**
+
+**基本信息**
+- 姓名：张三
+- 性别：男
+- 出生日期：1995年1月1日
+- 联系电话：138xxxx5678
+- 电子邮箱：zhangsan@example.com
+- 链接：[zhangsan-portfolio](https://zhangsan-portfolio.com)
+
+**教育背景**
+- 2014年9月 - 2018年6月 | XX大学 | 计算机科学与技术专业 | 学士
+- 主修课程：Java编程、数据结构、计算机网络、操作系统、数据库原理
+
+**专业技能**
+- 编程语言：Java、Python、C++
+- 开发工具：Eclipse、IntelliJ IDEA、Git
+- 数据库：MySQL、Oracle
+- 其他：Spring Boot、Hibernate、Maven、Docker
+
+**项目经验**
+1. **在线书店项目**
+   - 2019年3月 - 2019年6月 | XX科技有限公司
+   - 项目描述：开发一个在线书店系统，提供书籍搜索、购买、评论等功能。
+   - 个人职责：负责用户模块的设计与实现，包括用户注册、登录、个人信息管理等。
+   - 技术栈：Java、Spring Boot、MyBatis、MySQL
+   - 项目成果：成功上线，用户反馈良好，提高了用户购买体验。
+
+2. **企业资源管理系统**
+   - 2020年7月 - 2020年12月 | XX科技有限公司
+   - 项目描述：开发一个企业资源管理系统，实现员工信息管理、考勤管理、项目管理等功能。
+   - 个人职责：负责系统架构设计和部分模块的开发，包括员工信息管理和考勤管理。
+   - 技术栈：Java、Spring Cloud、MyBatis、MySQL
+   - 项目成果：系统稳定运行，有效提高了企业内部管理效率。
+
+**实习经历**
+1. **软件开发实习生**
+   - 2018年7月 - 2018年9月 | XX科技有限公司
+   - 工作内容：参与公司内部项目的开发，负责代码编写和测试。
+   - 实习成果：独立完成了一个小型项目的开发，提升了编程能力和团队协作能力。
+
+**竞赛经历**
+1. **XX大学程序设计竞赛**
+   - 2017年11月 | 一等奖
+   - 竞赛内容：解决编程问题，展示编程能力。
+   - 个人贡献：作为团队核心成员，负责算法设计和代码实现。
+
+**荣誉奖项**
+- XX大学优秀毕业生 | XX大学 | 2018年
+- XX大学三好学生 | XX大学 | 2016年
+
+**其他经历**
+- 参与组织XX大学计算机协会活动，负责技术分享和活动策划。
+- 参与编写XX大学计算机专业教材，负责编写部分章节。
+
+**自我评价**
+- 具备扎实的计算机科学基础知识，熟练掌握Java等编程语言。
+- 工作认真负责，具有良好的团队协作精神和沟通能力。
+- 对新技术有较强的学习兴趣，能够快速适应新环境和新任务。(String), (String), 2025-03-16T22:57:32.355959(LocalDateTime), 2025-03-16T22:57:32.355959(LocalDateTime), 127.0.0.1(String), 1(Integer), 求职者想寻找关于Java工程师的工作(String), 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47908b2f]
+2025-03-16 22:57:32.417  INFO 31028 --- [0.0-8080-exec-1] c.r.s.impl.ResumeResultServiceImpl       : 保存简历结果成功，ID: 88
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47908b2f]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47908b2f]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@47908b2f]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@142abfa2] was not registered for synchronization because synchronization is not active
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.baomidou.mybatisplus.core.toolkit.SetAccessibleAction (jar:file:/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar!/BOOT-INF/lib/mybatis-plus-core-3.5.2.jar!/) to field java.lang.invoke.SerializedLambda.capturingClass
+WARNING: Please consider reporting this to the maintainers of com.baomidou.mybatisplus.core.toolkit.SetAccessibleAction
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+JDBC Connection [HikariProxyConnection@380000847 wrapping com.mysql.cj.jdbc.ConnectionImpl@281a5add] will not be managed by Spring
+==>  Preparing: SELECT id,original_content,modified_content,modification_description,created_time,updated_time,user_id,status,resume_classification,modified_resume_classification FROM resume_result ORDER BY created_time DESC
+==> Parameters: 
+<==    Columns: id, original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification
+<==        Row: 88, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:57:32, 2025-03-16 22:57:32, 127.0.0.1, 1, 求职者想寻找关于Java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。
+<==        Row: 87, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:47:37, 2025-03-16 22:47:37, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。
+<==        Row: 86, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:41:32, 2025-03-16 22:41:32, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 85, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:37:26, 2025-03-16 22:37:26, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 84, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:25:25, 2025-03-16 22:25:25, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 83, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:18:23, 2025-03-16 22:18:23, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。, Java高级开发工程师
+<==        Row: 82, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:14:42, 2025-03-16 22:14:42, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。, null
+<==        Row: 81, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:01:34, 2025-03-16 22:01:34, 127.0.0.1, 1, null, null
+<==        Row: 80, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:58:37, 2025-03-16 21:58:37, 127.0.0.1, 1, null, null
+<==        Row: 79, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:54:21, 2025-03-16 21:54:21, 127.0.0.1, 1, null, null
+<==        Row: 78, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:32:37, 2025-03-16 21:32:37, 127.0.0.1, 1, null, null
+<==        Row: 77, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:17:26, 2025-03-16 21:17:26, 127.0.0.1, 1, null, null
+<==        Row: 76, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:09:20, 2025-03-16 21:09:20, 127.0.0.1, 1, null, null
+<==        Row: 75, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:07:31, 2025-03-16 21:07:31, 127.0.0.1, 1, null, null
+<==        Row: 74, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:06:22, 2025-03-16 21:06:22, 127.0.0.1, 1, null, null
+<==        Row: 73, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:59, 2025-03-16 20:57:59, 127.0.0.1, 1, null, null
+<==        Row: 72, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:21, 2025-03-16 20:57:21, 127.0.0.1, 1, null, null
+<==        Row: 71, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:49:26, 2025-03-16 20:49:26, 127.0.0.1, 1, null, null
+<==        Row: 70, <<BLOB>>, <<BLOB>>, 我想去agent公司实习 帮我改下简历, 2025-03-16 20:44:19, 2025-03-16 20:44:19, 127.0.0.1, 1, null, null
+<==        Row: 69, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:43:22, 2025-03-16 20:43:22, 127.0.0.1, 1, null, null
+<==        Row: 68, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:38:34, 2025-03-16 20:38:34, 127.0.0.1, 1, null, null
+<==        Row: 67, <<BLOB>>, <<BLOB>>, , 2025-03-16 19:04:40, 2025-03-16 19:04:40, 127.0.0.1, 1, null, null
+<==        Row: 66, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:46, 2025-03-16 16:01:46, 127.0.0.1, 1, null, null
+<==        Row: 65, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:15, 2025-03-16 16:01:15, 127.0.0.1, 1, null, null
+<==        Row: 64, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:55:33, 2025-03-16 15:55:33, 127.0.0.1, 1, null, null
+<==        Row: 63, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:53:31, 2025-03-16 15:53:31, 127.0.0.1, 1, null, null
+<==        Row: 62, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:46:36, 2025-03-16 15:46:36, 127.0.0.1, 1, null, null
+<==        Row: 61, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:45:18, 2025-03-16 15:45:18, 127.0.0.1, 1, null, null
+<==        Row: 60, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:44:16, 2025-03-16 15:44:16, 127.0.0.1, 1, null, null
+<==        Row: 59, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:39:42, 2025-03-16 15:39:42, 127.0.0.1, 1, null, null
+<==        Row: 58, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:25:38, 2025-03-16 15:25:38, 127.0.0.1, 1, null, null
+<==        Row: 57, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:34:21, 2025-03-16 03:34:21, 127.0.0.1, 1, null, null
+<==        Row: 56, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:33:12, 2025-03-16 03:33:12, 127.0.0.1, 1, null, null
+<==        Row: 55, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:31:13, 2025-03-16 03:31:13, 127.0.0.1, 1, null, null
+<==        Row: 54, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:27:23, 2025-03-16 03:27:23, 127.0.0.1, 1, null, null
+<==        Row: 53, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:25:38, 2025-03-16 03:25:38, 127.0.0.1, 1, null, null
+<==        Row: 52, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:03:41, 2025-03-16 03:03:41, 127.0.0.1, 1, null, null
+<==        Row: 51, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:02:39, 2025-03-16 03:02:39, 127.0.0.1, 1, null, null
+<==        Row: 50, <<BLOB>>, <<BLOB>>, , 2025-03-15 14:56:45, 2025-03-15 14:56:45, 127.0.0.1, 1, null, null
+<==        Row: 49, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:55:26, 2025-03-13 23:55:26, 127.0.0.1, 1, null, null
+<==        Row: 48, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:18:18, 2025-03-13 23:18:18, 127.0.0.1, 1, null, null
+<==        Row: 47, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:16:02, 2025-03-13 23:16:02, 127.0.0.1, 1, null, null
+<==        Row: 46, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:11:23, 2025-03-13 23:11:23, 127.0.0.1, 1, null, null
+<==        Row: 45, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:05:47, 2025-03-13 23:05:47, 127.0.0.1, 1, null, null
+<==        Row: 44, <<BLOB>>, <<BLOB>>, , 2025-03-13 22:57:19, 2025-03-13 22:57:19, 127.0.0.1, 1, null, null
+<==        Row: 43, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:52, 2025-03-13 22:28:52, null, 0, null, null
+<==        Row: 42, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:09, 2025-03-13 22:28:09, null, 0, 技术简历, Java开发工程师
+<==      Total: 47
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@142abfa2]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1022ff93] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@518325223 wrapping com.mysql.cj.jdbc.ConnectionImpl@281a5add] will not be managed by Spring
+==>  Preparing: SELECT id,original_content,modified_content,modification_description,created_time,updated_time,user_id,status,resume_classification,modified_resume_classification FROM resume_result ORDER BY created_time DESC
+==> Parameters: 
+<==    Columns: id, original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification
+<==        Row: 88, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:57:32, 2025-03-16 22:57:32, 127.0.0.1, 1, 求职者想寻找关于Java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。
+<==        Row: 87, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:47:37, 2025-03-16 22:47:37, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。
+<==        Row: 86, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:41:32, 2025-03-16 22:41:32, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 85, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:37:26, 2025-03-16 22:37:26, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 84, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:25:25, 2025-03-16 22:25:25, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 83, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:18:23, 2025-03-16 22:18:23, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。, Java高级开发工程师
+<==        Row: 82, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:14:42, 2025-03-16 22:14:42, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。, null
+<==        Row: 81, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:01:34, 2025-03-16 22:01:34, 127.0.0.1, 1, null, null
+<==        Row: 80, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:58:37, 2025-03-16 21:58:37, 127.0.0.1, 1, null, null
+<==        Row: 79, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:54:21, 2025-03-16 21:54:21, 127.0.0.1, 1, null, null
+<==        Row: 78, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:32:37, 2025-03-16 21:32:37, 127.0.0.1, 1, null, null
+<==        Row: 77, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:17:26, 2025-03-16 21:17:26, 127.0.0.1, 1, null, null
+<==        Row: 76, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:09:20, 2025-03-16 21:09:20, 127.0.0.1, 1, null, null
+<==        Row: 75, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:07:31, 2025-03-16 21:07:31, 127.0.0.1, 1, null, null
+<==        Row: 74, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:06:22, 2025-03-16 21:06:22, 127.0.0.1, 1, null, null
+<==        Row: 73, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:59, 2025-03-16 20:57:59, 127.0.0.1, 1, null, null
+<==        Row: 72, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:21, 2025-03-16 20:57:21, 127.0.0.1, 1, null, null
+<==        Row: 71, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:49:26, 2025-03-16 20:49:26, 127.0.0.1, 1, null, null
+<==        Row: 70, <<BLOB>>, <<BLOB>>, 我想去agent公司实习 帮我改下简历, 2025-03-16 20:44:19, 2025-03-16 20:44:19, 127.0.0.1, 1, null, null
+<==        Row: 69, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:43:22, 2025-03-16 20:43:22, 127.0.0.1, 1, null, null
+<==        Row: 68, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:38:34, 2025-03-16 20:38:34, 127.0.0.1, 1, null, null
+<==        Row: 67, <<BLOB>>, <<BLOB>>, , 2025-03-16 19:04:40, 2025-03-16 19:04:40, 127.0.0.1, 1, null, null
+<==        Row: 66, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:46, 2025-03-16 16:01:46, 127.0.0.1, 1, null, null
+<==        Row: 65, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:15, 2025-03-16 16:01:15, 127.0.0.1, 1, null, null
+<==        Row: 64, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:55:33, 2025-03-16 15:55:33, 127.0.0.1, 1, null, null
+<==        Row: 63, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:53:31, 2025-03-16 15:53:31, 127.0.0.1, 1, null, null
+<==        Row: 62, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:46:36, 2025-03-16 15:46:36, 127.0.0.1, 1, null, null
+<==        Row: 61, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:45:18, 2025-03-16 15:45:18, 127.0.0.1, 1, null, null
+<==        Row: 60, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:44:16, 2025-03-16 15:44:16, 127.0.0.1, 1, null, null
+<==        Row: 59, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:39:42, 2025-03-16 15:39:42, 127.0.0.1, 1, null, null
+<==        Row: 58, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:25:38, 2025-03-16 15:25:38, 127.0.0.1, 1, null, null
+<==        Row: 57, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:34:21, 2025-03-16 03:34:21, 127.0.0.1, 1, null, null
+<==        Row: 56, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:33:12, 2025-03-16 03:33:12, 127.0.0.1, 1, null, null
+<==        Row: 55, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:31:13, 2025-03-16 03:31:13, 127.0.0.1, 1, null, null
+<==        Row: 54, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:27:23, 2025-03-16 03:27:23, 127.0.0.1, 1, null, null
+<==        Row: 53, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:25:38, 2025-03-16 03:25:38, 127.0.0.1, 1, null, null
+<==        Row: 52, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:03:41, 2025-03-16 03:03:41, 127.0.0.1, 1, null, null
+<==        Row: 51, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:02:39, 2025-03-16 03:02:39, 127.0.0.1, 1, null, null
+<==        Row: 50, <<BLOB>>, <<BLOB>>, , 2025-03-15 14:56:45, 2025-03-15 14:56:45, 127.0.0.1, 1, null, null
+<==        Row: 49, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:55:26, 2025-03-13 23:55:26, 127.0.0.1, 1, null, null
+<==        Row: 48, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:18:18, 2025-03-13 23:18:18, 127.0.0.1, 1, null, null
+<==        Row: 47, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:16:02, 2025-03-13 23:16:02, 127.0.0.1, 1, null, null
+<==        Row: 46, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:11:23, 2025-03-13 23:11:23, 127.0.0.1, 1, null, null
+<==        Row: 45, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:05:47, 2025-03-13 23:05:47, 127.0.0.1, 1, null, null
+<==        Row: 44, <<BLOB>>, <<BLOB>>, , 2025-03-13 22:57:19, 2025-03-13 22:57:19, 127.0.0.1, 1, null, null
+<==        Row: 43, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:52, 2025-03-13 22:28:52, null, 0, null, null
+<==        Row: 42, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:09, 2025-03-13 22:28:09, null, 0, 技术简历, Java开发工程师
+<==      Total: 47
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1022ff93]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67554a37] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1287591264 wrapping com.mysql.cj.jdbc.ConnectionImpl@281a5add] will not be managed by Spring
+==>  Preparing: SELECT id,original_content,modified_content,modification_description,created_time,updated_time,user_id,status,resume_classification,modified_resume_classification FROM resume_result WHERE id=?
+==> Parameters: 88(Long)
+<==    Columns: id, original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification
+<==        Row: 88, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:57:32, 2025-03-16 22:57:32, 127.0.0.1, 1, 求职者想寻找关于Java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67554a37]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 22:57:45.665  INFO 32331 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 32331 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 22:57:45.668  INFO 32331 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 22:57:46.154  INFO 32331 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 22:57:46.162  INFO 32331 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JDBC repository interfaces.
+2025-03-16 22:57:46.220  WARN 32331 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 22:57:46.221  WARN 32331 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 22:57:46.508  INFO 32331 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 22:57:46.515  INFO 32331 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 22:57:46.515  INFO 32331 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 22:57:46.561  INFO 32331 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 22:57:46.561  INFO 32331 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 854 ms
+2025-03-16 22:57:46.710  WARN 32331 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 22:57:47.211  INFO 32331 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 22:57:47.424  INFO 32331 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 22:57:47.502  INFO 32331 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 22:57:47.510  INFO 32331 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.152 seconds (JVM running for 2.432)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 22:58:21.137  INFO 629 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 629 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 22:58:21.141  INFO 629 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 22:58:21.612  INFO 629 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 22:58:21.620  INFO 629 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JDBC repository interfaces.
+2025-03-16 22:58:21.678  WARN 629 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 22:58:21.678  WARN 629 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 22:58:21.964  INFO 629 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 22:58:21.971  INFO 629 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 22:58:21.971  INFO 629 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 22:58:22.014  INFO 629 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 22:58:22.014  INFO 629 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 833 ms
+2025-03-16 22:58:22.146  WARN 629 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 22:58:22.594  INFO 629 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 22:58:22.796  INFO 629 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 22:58:22.876  INFO 629 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 22:58:22.883  INFO 629 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.051 seconds (JVM running for 2.335)
+2025-03-16 22:58:26.995  INFO 629 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-03-16 22:58:27.016  INFO 629 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 22:59:18.342  INFO 1675 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 1675 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 22:59:18.346  INFO 1675 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 22:59:18.819  INFO 1675 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 22:59:18.827  INFO 1675 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 22:59:18.884  WARN 1675 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 22:59:18.884  WARN 1675 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 22:59:19.180  INFO 1675 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 22:59:19.187  INFO 1675 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 22:59:19.187  INFO 1675 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 22:59:19.231  INFO 1675 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 22:59:19.231  INFO 1675 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 843 ms
+2025-03-16 22:59:19.361  WARN 1675 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 22:59:19.835  INFO 1675 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 22:59:20.054  INFO 1675 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 22:59:20.137  INFO 1675 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 22:59:20.144  INFO 1675 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.099 seconds (JVM running for 2.387)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 23:00:30.989  INFO 3177 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 3177 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 23:00:30.993  INFO 3177 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 23:00:31.433  INFO 3177 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 23:00:31.441  INFO 3177 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 23:00:31.498  WARN 3177 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 23:00:31.498  WARN 3177 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 23:00:31.784  INFO 3177 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 23:00:31.790  INFO 3177 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 23:00:31.791  INFO 3177 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 23:00:31.833  INFO 3177 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 23:00:31.833  INFO 3177 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 800 ms
+2025-03-16 23:00:31.965  WARN 3177 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 23:00:32.384  INFO 3177 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 23:00:32.578  INFO 3177 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 23:00:32.653  INFO 3177 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 23:00:32.659  INFO 3177 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 1.961 seconds (JVM running for 2.232)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 23:03:33.267  INFO 6379 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 6379 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 23:03:33.269  INFO 6379 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 23:03:33.735  INFO 6379 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 23:03:33.743  INFO 6379 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 23:03:33.802  WARN 6379 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 23:03:33.803  WARN 6379 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 23:03:34.139  INFO 6379 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 23:03:34.146  INFO 6379 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 23:03:34.146  INFO 6379 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 23:03:34.190  INFO 6379 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 23:03:34.190  INFO 6379 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 881 ms
+2025-03-16 23:03:34.348  WARN 6379 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 23:03:34.871  INFO 6379 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 23:03:35.102  INFO 6379 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 23:03:35.190  INFO 6379 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 23:03:35.197  INFO 6379 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.232 seconds (JVM running for 2.52)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 23:05:25.060  INFO 8188 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 8188 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 23:05:25.063  INFO 8188 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 23:05:25.529  INFO 8188 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 23:05:25.537  INFO 8188 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 23:05:25.601  WARN 8188 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 23:05:25.601  WARN 8188 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 23:05:25.930  INFO 8188 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 23:05:25.937  INFO 8188 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 23:05:25.937  INFO 8188 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 23:05:25.980  INFO 8188 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 23:05:25.981  INFO 8188 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 877 ms
+2025-03-16 23:05:26.111  WARN 8188 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 23:05:26.576  INFO 8188 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 23:05:26.792  INFO 8188 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 23:05:26.887  INFO 8188 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 23:05:26.897  INFO 8188 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.142 seconds (JVM running for 2.429)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2025-03-16 23:06:25.877  INFO 9333 --- [           main] com.resume.ResumeApplication             : Starting ResumeApplication v1.0.0 using Java 11.0.26 on PC-202409182322 with PID 9333 (/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar started by m in /home/m/resume_revision/backend_of_java_for_save)
+2025-03-16 23:06:25.880  INFO 9333 --- [           main] com.resume.ResumeApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-03-16 23:06:26.349  INFO 9333 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-03-16 23:06:26.357  INFO 9333 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JDBC repository interfaces.
+2025-03-16 23:06:26.422  WARN 9333 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : Skipping MapperFactoryBean with name 'resumeResultMapper' and 'com.resume.mapper.ResumeResultMapper' mapperInterface. Bean already defined with the same name!
+2025-03-16 23:06:26.422  WARN 9333 --- [           main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.resume.mapper]' package. Please check your configuration.
+2025-03-16 23:06:26.771  INFO 9333 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2025-03-16 23:06:26.778  INFO 9333 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-16 23:06:26.779  INFO 9333 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2025-03-16 23:06:26.822  INFO 9333 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2025-03-16 23:06:26.822  INFO 9333 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 903 ms
+2025-03-16 23:06:26.959  WARN 9333 --- [           main] c.b.m.e.s.MybatisSqlSessionFactoryBean   : Property 'mapperLocations' was specified but matching resources are not found.
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.5.2 
+Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
+2025-03-16 23:06:27.443  INFO 9333 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-16 23:06:27.672  INFO 9333 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-16 23:06:27.763  INFO 9333 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-03-16 23:06:27.772  INFO 9333 --- [           main] com.resume.ResumeApplication             : Started ResumeApplication in 2.195 seconds (JVM running for 2.483)
+2025-03-16 23:07:17.972  INFO 9333 --- [0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-16 23:07:17.973  INFO 9333 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-16 23:07:17.973  INFO 9333 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-03-16 23:07:18.036  INFO 9333 --- [0.0-8080-exec-1] c.r.controller.ResumeResultController    : 接收到保存简历请求，内容长度：original=1, modified=1125
+Creating a new SqlSession
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58d955ea]
+JDBC Connection [HikariProxyConnection@102513134 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a706c9f] will be managed by Spring
+==>  Preparing: INSERT INTO resume_result ( original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: o(String), **个人信息**
+
+姓名：张伟
+联系方式：13800138000 | zhangwei@example.com
+LinkedIn/GitHub：[https://www.linkedin.com/in/zhangwei](https://www.linkedin.com/in/zhangwei)
+
+**教育背景**
+
+- 2022 - 2026，计算机科学与技术，硕士
+  [XX大学]，[城市，国家]
+  - 主修课程：数据结构、操作系统、计算机网络、数据库原理
+  - GPA：3.8/4.0
+
+**专业技能**
+
+- 编程语言：Java，Python，C++
+- 框架和库：Spring Boot，Hibernate，React.js
+- 数据库：MySQL，MongoDB
+- 版本控制：Git
+- 开发工具：IntelliJ IDEA，Eclipse
+- 操作系统：Linux，Windows
+
+**项目经验**
+
+- **XX电商平台系统**（2022年3月 - 2022年7月）
+  - 项目描述：开发一个基于Spring Boot的电商平台，提供商品管理、用户注册和购物车功能。
+  - 负责内容：负责用户管理模块的设计与实现，包括用户注册、登录和权限管理。
+  - 技术栈：Java，Spring Boot，MySQL
+  - 成果：成功实现了用户管理模块，并确保了系统的稳定性和安全性。
+
+**实习经历**
+
+- **YY科技有限公司**（2021年6月 - 2021年8月）
+  - 职位：软件开发实习生
+  - 工作内容：参与公司内部CRM系统的开发和测试工作，负责模块的单元测试和bug修复。
+  - 技能提升：提升了Java编程能力，熟悉了Linux操作系统下的开发环境。
+
+**竞赛经历**
+
+- **XX大学编程竞赛**（2020年10月）
+  - 获奖情况：二等奖
+  - 项目描述：开发一个基于Python的自动化数据处理系统，用于分析大量数据并生成报告。
+
+**荣誉奖项**
+
+- **XX大学优秀毕业生**（2020年）
+  - 奖项描述：表彰在学术和课外活动中表现优异的学生。
+
+**其他经历**
+
+- **XX大学计算机协会**（2019年9月 - 2020年6月）
+  - 职责：担任技术部成员，负责技术分享和活动策划。
+  - 影响：提高了技术演讲和组织活动的技能。
+
+**自我评价**
+
+- 具备扎实的计算机科学基础知识，熟悉软件开发流程。
+- 良好的团队合作精神和沟通能力，能够快速适应团队环境。
+- 对新技术充满热情，善于学习和应用新知识。
+- 注重细节，具备良好的问题解决能力和项目管理能力。(String), (String), 2025-03-16T23:07:18.054098(LocalDateTime), 2025-03-16T23:07:18.054098(LocalDateTime), 127.0.0.1(String), 1(Integer), 求职者想寻找关于java工程师的工作(String), 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。(String)
+<==    Updates: 1
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58d955ea]
+2025-03-16 23:07:18.115  INFO 9333 --- [0.0-8080-exec-1] c.r.s.impl.ResumeResultServiceImpl       : 保存简历结果成功，ID: 89
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58d955ea]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58d955ea]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@58d955ea]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2cc2b44] was not registered for synchronization because synchronization is not active
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.baomidou.mybatisplus.core.toolkit.SetAccessibleAction (jar:file:/home/m/resume_revision/backend_of_java_for_save/target/resume-service-1.0.0.jar!/BOOT-INF/lib/mybatis-plus-core-3.5.2.jar!/) to field java.lang.invoke.SerializedLambda.capturingClass
+WARNING: Please consider reporting this to the maintainers of com.baomidou.mybatisplus.core.toolkit.SetAccessibleAction
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+JDBC Connection [HikariProxyConnection@1487458248 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a706c9f] will not be managed by Spring
+==>  Preparing: SELECT id,original_content,modified_content,modification_description,created_time,updated_time,user_id,status,resume_classification,modified_resume_classification FROM resume_result ORDER BY created_time DESC
+==> Parameters: 
+<==    Columns: id, original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification
+<==        Row: 89, <<BLOB>>, <<BLOB>>, , 2025-03-16 23:07:18, 2025-03-16 23:07:18, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 88, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:57:32, 2025-03-16 22:57:32, 127.0.0.1, 1, 求职者想寻找关于Java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。
+<==        Row: 87, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:47:37, 2025-03-16 22:47:37, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。
+<==        Row: 86, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:41:32, 2025-03-16 22:41:32, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 85, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:37:26, 2025-03-16 22:37:26, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 84, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:25:25, 2025-03-16 22:25:25, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 83, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:18:23, 2025-03-16 22:18:23, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。, Java高级开发工程师
+<==        Row: 82, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:14:42, 2025-03-16 22:14:42, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。, null
+<==        Row: 81, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:01:34, 2025-03-16 22:01:34, 127.0.0.1, 1, null, null
+<==        Row: 80, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:58:37, 2025-03-16 21:58:37, 127.0.0.1, 1, null, null
+<==        Row: 79, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:54:21, 2025-03-16 21:54:21, 127.0.0.1, 1, null, null
+<==        Row: 78, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:32:37, 2025-03-16 21:32:37, 127.0.0.1, 1, null, null
+<==        Row: 77, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:17:26, 2025-03-16 21:17:26, 127.0.0.1, 1, null, null
+<==        Row: 76, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:09:20, 2025-03-16 21:09:20, 127.0.0.1, 1, null, null
+<==        Row: 75, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:07:31, 2025-03-16 21:07:31, 127.0.0.1, 1, null, null
+<==        Row: 74, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:06:22, 2025-03-16 21:06:22, 127.0.0.1, 1, null, null
+<==        Row: 73, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:59, 2025-03-16 20:57:59, 127.0.0.1, 1, null, null
+<==        Row: 72, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:21, 2025-03-16 20:57:21, 127.0.0.1, 1, null, null
+<==        Row: 71, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:49:26, 2025-03-16 20:49:26, 127.0.0.1, 1, null, null
+<==        Row: 70, <<BLOB>>, <<BLOB>>, 我想去agent公司实习 帮我改下简历, 2025-03-16 20:44:19, 2025-03-16 20:44:19, 127.0.0.1, 1, null, null
+<==        Row: 69, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:43:22, 2025-03-16 20:43:22, 127.0.0.1, 1, null, null
+<==        Row: 68, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:38:34, 2025-03-16 20:38:34, 127.0.0.1, 1, null, null
+<==        Row: 67, <<BLOB>>, <<BLOB>>, , 2025-03-16 19:04:40, 2025-03-16 19:04:40, 127.0.0.1, 1, null, null
+<==        Row: 66, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:46, 2025-03-16 16:01:46, 127.0.0.1, 1, null, null
+<==        Row: 65, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:15, 2025-03-16 16:01:15, 127.0.0.1, 1, null, null
+<==        Row: 64, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:55:33, 2025-03-16 15:55:33, 127.0.0.1, 1, null, null
+<==        Row: 63, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:53:31, 2025-03-16 15:53:31, 127.0.0.1, 1, null, null
+<==        Row: 62, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:46:36, 2025-03-16 15:46:36, 127.0.0.1, 1, null, null
+<==        Row: 61, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:45:18, 2025-03-16 15:45:18, 127.0.0.1, 1, null, null
+<==        Row: 60, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:44:16, 2025-03-16 15:44:16, 127.0.0.1, 1, null, null
+<==        Row: 59, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:39:42, 2025-03-16 15:39:42, 127.0.0.1, 1, null, null
+<==        Row: 58, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:25:38, 2025-03-16 15:25:38, 127.0.0.1, 1, null, null
+<==        Row: 57, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:34:21, 2025-03-16 03:34:21, 127.0.0.1, 1, null, null
+<==        Row: 56, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:33:12, 2025-03-16 03:33:12, 127.0.0.1, 1, null, null
+<==        Row: 55, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:31:13, 2025-03-16 03:31:13, 127.0.0.1, 1, null, null
+<==        Row: 54, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:27:23, 2025-03-16 03:27:23, 127.0.0.1, 1, null, null
+<==        Row: 53, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:25:38, 2025-03-16 03:25:38, 127.0.0.1, 1, null, null
+<==        Row: 52, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:03:41, 2025-03-16 03:03:41, 127.0.0.1, 1, null, null
+<==        Row: 51, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:02:39, 2025-03-16 03:02:39, 127.0.0.1, 1, null, null
+<==        Row: 50, <<BLOB>>, <<BLOB>>, , 2025-03-15 14:56:45, 2025-03-15 14:56:45, 127.0.0.1, 1, null, null
+<==        Row: 49, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:55:26, 2025-03-13 23:55:26, 127.0.0.1, 1, null, null
+<==        Row: 48, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:18:18, 2025-03-13 23:18:18, 127.0.0.1, 1, null, null
+<==        Row: 47, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:16:02, 2025-03-13 23:16:02, 127.0.0.1, 1, null, null
+<==        Row: 46, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:11:23, 2025-03-13 23:11:23, 127.0.0.1, 1, null, null
+<==        Row: 45, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:05:47, 2025-03-13 23:05:47, 127.0.0.1, 1, null, null
+<==        Row: 44, <<BLOB>>, <<BLOB>>, , 2025-03-13 22:57:19, 2025-03-13 22:57:19, 127.0.0.1, 1, null, null
+<==        Row: 43, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:52, 2025-03-13 22:28:52, null, 0, null, null
+<==        Row: 42, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:09, 2025-03-13 22:28:09, null, 0, 技术简历, Java开发工程师
+<==      Total: 48
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2cc2b44]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42f12c38] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1278659094 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a706c9f] will not be managed by Spring
+==>  Preparing: SELECT id,original_content,modified_content,modification_description,created_time,updated_time,user_id,status,resume_classification,modified_resume_classification FROM resume_result ORDER BY created_time DESC
+==> Parameters: 
+<==    Columns: id, original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification
+<==        Row: 89, <<BLOB>>, <<BLOB>>, , 2025-03-16 23:07:18, 2025-03-16 23:07:18, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 88, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:57:32, 2025-03-16 22:57:32, 127.0.0.1, 1, 求职者想寻找关于Java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。
+<==        Row: 87, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:47:37, 2025-03-16 22:47:37, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。
+<==        Row: 86, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:41:32, 2025-03-16 22:41:32, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 85, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:37:26, 2025-03-16 22:37:26, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 84, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:25:25, 2025-03-16 22:25:25, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==        Row: 83, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:18:23, 2025-03-16 22:18:23, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了提供多个分类示例的要求，这有助于检索系统理解问题的多样性。, Java高级开发工程师
+<==        Row: 82, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:14:42, 2025-03-16 22:14:42, 127.0.0.1, 1, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，以便于向量存储能够更准确地匹配相关文档。以下是优化后的问题：
+
+“请提供一份针对Java工程师求职者的简历分类指南，指南应包含以下具体内容：详细的项目经验分类、技能特长分类、实习经历分类、竞赛经历分类、荣誉奖项分类以及其他相关经历分类。请确保分类清晰、详细，并尽可能提供多个分类示例。”
+
+这种优化后的提问方式明确了所需信息的具体类别和详细程度，有助于向量存储系统更精确地定位相关文档。, null
+<==        Row: 81, <<BLOB>>, <<BLOB>>, , 2025-03-16 22:01:34, 2025-03-16 22:01:34, 127.0.0.1, 1, null, null
+<==        Row: 80, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:58:37, 2025-03-16 21:58:37, 127.0.0.1, 1, null, null
+<==        Row: 79, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:54:21, 2025-03-16 21:54:21, 127.0.0.1, 1, null, null
+<==        Row: 78, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:32:37, 2025-03-16 21:32:37, 127.0.0.1, 1, null, null
+<==        Row: 77, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:17:26, 2025-03-16 21:17:26, 127.0.0.1, 1, null, null
+<==        Row: 76, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:09:20, 2025-03-16 21:09:20, 127.0.0.1, 1, null, null
+<==        Row: 75, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:07:31, 2025-03-16 21:07:31, 127.0.0.1, 1, null, null
+<==        Row: 74, <<BLOB>>, <<BLOB>>, , 2025-03-16 21:06:22, 2025-03-16 21:06:22, 127.0.0.1, 1, null, null
+<==        Row: 73, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:59, 2025-03-16 20:57:59, 127.0.0.1, 1, null, null
+<==        Row: 72, <<BLOB>>, <<BLOB>>, 我想找一个ai agent实习, 2025-03-16 20:57:21, 2025-03-16 20:57:21, 127.0.0.1, 1, null, null
+<==        Row: 71, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:49:26, 2025-03-16 20:49:26, 127.0.0.1, 1, null, null
+<==        Row: 70, <<BLOB>>, <<BLOB>>, 我想去agent公司实习 帮我改下简历, 2025-03-16 20:44:19, 2025-03-16 20:44:19, 127.0.0.1, 1, null, null
+<==        Row: 69, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:43:22, 2025-03-16 20:43:22, 127.0.0.1, 1, null, null
+<==        Row: 68, <<BLOB>>, <<BLOB>>, , 2025-03-16 20:38:34, 2025-03-16 20:38:34, 127.0.0.1, 1, null, null
+<==        Row: 67, <<BLOB>>, <<BLOB>>, , 2025-03-16 19:04:40, 2025-03-16 19:04:40, 127.0.0.1, 1, null, null
+<==        Row: 66, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:46, 2025-03-16 16:01:46, 127.0.0.1, 1, null, null
+<==        Row: 65, <<BLOB>>, <<BLOB>>, , 2025-03-16 16:01:15, 2025-03-16 16:01:15, 127.0.0.1, 1, null, null
+<==        Row: 64, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:55:33, 2025-03-16 15:55:33, 127.0.0.1, 1, null, null
+<==        Row: 63, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:53:31, 2025-03-16 15:53:31, 127.0.0.1, 1, null, null
+<==        Row: 62, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:46:36, 2025-03-16 15:46:36, 127.0.0.1, 1, null, null
+<==        Row: 61, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:45:18, 2025-03-16 15:45:18, 127.0.0.1, 1, null, null
+<==        Row: 60, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:44:16, 2025-03-16 15:44:16, 127.0.0.1, 1, null, null
+<==        Row: 59, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:39:42, 2025-03-16 15:39:42, 127.0.0.1, 1, null, null
+<==        Row: 58, <<BLOB>>, <<BLOB>>, , 2025-03-16 15:25:38, 2025-03-16 15:25:38, 127.0.0.1, 1, null, null
+<==        Row: 57, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:34:21, 2025-03-16 03:34:21, 127.0.0.1, 1, null, null
+<==        Row: 56, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:33:12, 2025-03-16 03:33:12, 127.0.0.1, 1, null, null
+<==        Row: 55, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:31:13, 2025-03-16 03:31:13, 127.0.0.1, 1, null, null
+<==        Row: 54, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:27:23, 2025-03-16 03:27:23, 127.0.0.1, 1, null, null
+<==        Row: 53, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:25:38, 2025-03-16 03:25:38, 127.0.0.1, 1, null, null
+<==        Row: 52, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:03:41, 2025-03-16 03:03:41, 127.0.0.1, 1, null, null
+<==        Row: 51, <<BLOB>>, <<BLOB>>, , 2025-03-16 03:02:39, 2025-03-16 03:02:39, 127.0.0.1, 1, null, null
+<==        Row: 50, <<BLOB>>, <<BLOB>>, , 2025-03-15 14:56:45, 2025-03-15 14:56:45, 127.0.0.1, 1, null, null
+<==        Row: 49, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:55:26, 2025-03-13 23:55:26, 127.0.0.1, 1, null, null
+<==        Row: 48, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:18:18, 2025-03-13 23:18:18, 127.0.0.1, 1, null, null
+<==        Row: 47, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:16:02, 2025-03-13 23:16:02, 127.0.0.1, 1, null, null
+<==        Row: 46, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:11:23, 2025-03-13 23:11:23, 127.0.0.1, 1, null, null
+<==        Row: 45, <<BLOB>>, <<BLOB>>, , 2025-03-13 23:05:47, 2025-03-13 23:05:47, 127.0.0.1, 1, null, null
+<==        Row: 44, <<BLOB>>, <<BLOB>>, , 2025-03-13 22:57:19, 2025-03-13 22:57:19, 127.0.0.1, 1, null, null
+<==        Row: 43, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:52, 2025-03-13 22:28:52, null, 0, null, null
+<==        Row: 42, <<BLOB>>, <<BLOB>>, null, 2025-03-13 22:28:09, 2025-03-13 22:28:09, null, 0, 技术简历, Java开发工程师
+<==      Total: 48
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42f12c38]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@dc9b0e7] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@545412664 wrapping com.mysql.cj.jdbc.ConnectionImpl@3a706c9f] will not be managed by Spring
+==>  Preparing: SELECT id,original_content,modified_content,modification_description,created_time,updated_time,user_id,status,resume_classification,modified_resume_classification FROM resume_result WHERE id=?
+==> Parameters: 89(Long)
+<==    Columns: id, original_content, modified_content, modification_description, created_time, updated_time, user_id, status, resume_classification, modified_resume_classification
+<==        Row: 89, <<BLOB>>, <<BLOB>>, , 2025-03-16 23:07:18, 2025-03-16 23:07:18, 127.0.0.1, 1, 求职者想寻找关于java工程师的工作, 为了优化该问题以便于在向量存储中进行检索，我们需要将问题转化为更具体、更结构化的形式，同时保留其核心语义。以下是优化后的版本：
+
+---
+
+请提供一份针对Java工程师求职者的简历分类指南，重点包括以下类别：详细的项目经验描述、专业技能列表、实习及实践经历概述、竞赛参与及获奖情况、荣誉奖项记录以及其他相关经历。请确保分类清晰、具体，并尽可能提供多个分类示例。
+
+---
+
+在这个优化版本中，我保留了原始问题的核心要求，同时通过以下方式提高了问题的可检索性：
+
+1. 明确了简历分类的具体内容，包括项目经验、技能特长、实习经历、竞赛经历、荣誉奖项和其他经历。
+2. 强调了分类的详细性和具体性，以便于检索系统更准确地匹配相关内容。
+3. 提出了“请确保分类清晰、具体，并尽可能提供多个分类示例”，这有助于检索系统理解问题的具体意图，并可能返回更相关的结果。
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@dc9b0e7]

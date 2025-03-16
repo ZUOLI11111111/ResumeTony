@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import threading
@@ -139,7 +140,6 @@ def modify_resume():
                 "Authorization": f"Bearer {API_KEY}",
                 "Content-Type": "application/json"
             }
-
             classify_data = classify_resume(resume_text)
             for line in classify_data.iter_lines():
                 if line:
@@ -161,6 +161,7 @@ def modify_resume():
                                         yield f"data: {json.dumps(response_data)}\n\n"
                             except Exception as e:
                                 print(f"Error parsing line: {line}, Error: {str(e)}")
+            resume_classify = send_data
             response_data = {
                 'type': 'end1',
                 'text': send_data
@@ -168,14 +169,13 @@ def modify_resume():
             yield f"data: {json.dumps(response_data)}\n\n"
 
             question_rewriter_results = question_rewriter.invoke({
-                "input": f"对于{send_data}，请写一个更加具体详细的简历分类，主要看项目经验，技能特长，实习经历，竞赛经历，荣誉奖项，其他经历。分类可以是一个，也可以是多个。"
+                "input": f"对于{send_data}，请写一个更加具体详细的简历分类，主要看项目经验，技能特长，实习经历，竞赛经历，荣誉奖项，其他经历。分类可以是一个，也可以是多个。用{target_language}写"
             })
             response_data = {
                 'type': 'end12',
                 'text': question_rewriter_results
             }
             yield f"data: {json.dumps(response_data)}\n\n"
-
             messages = [
             {"role": "system", "content": "你是一个专业的简历修改专家，擅长根据用户的要求修改简历，要求有教育背景、专业，项目经验，技能特长，自我评价，实习经历，竞赛经历，荣誉奖项，其他经历。"},
             {"role": "user", "content": prompt + f"简历分类：{question_rewriter_results}，修改简历，要求有教育背景、专业，项目经验，技能特长，自我评价，实习经历，竞赛经历，荣誉奖项，其他经历。"}
@@ -272,7 +272,9 @@ def modify_resume():
                             'modifiedContent': send_data_to_verify,
                             'modificationDescription': requirements,
                             'userId': client_ip,
-                            'status': 1
+                            'status': 1,
+                            'resumeClassification': resume_classify,
+                            'modifiedResumeClassification': question_rewriter_results,
                         }
                         response = requests.post(
                             JAVA_BACKEND_URL,

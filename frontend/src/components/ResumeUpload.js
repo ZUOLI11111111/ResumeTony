@@ -91,13 +91,17 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
                                 }
                             } else if (data.type === 'end1') {
                                 setClassifyingStatus("简历分类完成，开始具体分类...");
+                                setModifiedResume(data.text);
                             } else if (data.type === 'end12') {
                                 setClassifyingStatus("具体分类完成，开始修改...");
+                                setModifiedResume(data.text);
                             } else if (data.type === 'end2') {
                                 setClassifyingStatus("简历修改完成，正在优化格式...");
+                                setModifiedResume(data.text);
                             } else if (data.type === 'end3') {
                                 setClassifyingStatus("");
                                 setSuccess("简历修改成功！");
+                                setModifiedResume(data.text);
                             }
                         } catch (error) {
                             console.error("解析服务器响应出错:", error, line);

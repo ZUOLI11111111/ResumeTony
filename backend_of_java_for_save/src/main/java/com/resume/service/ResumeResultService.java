@@ -44,4 +44,7 @@ public interface ResumeResultService extends IService<ResumeResult> {
      * @return 是否删除成功
      */
     boolean deleteResumeResult(Long id);
+
+    
+    
 } 
