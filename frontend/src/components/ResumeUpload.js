@@ -90,7 +90,9 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
                                     setModifiedResume(data.text);
                                 }
                             } else if (data.type === 'end1') {
-                                setClassifyingStatus("简历分类完成，开始修改...");
+                                setClassifyingStatus("简历分类完成，开始具体分类...");
+                            } else if (data.type === 'end12') {
+                                setClassifyingStatus("具体分类完成，开始修改...");
                             } else if (data.type === 'end2') {
                                 setClassifyingStatus("简历修改完成，正在优化格式...");
                             } else if (data.type === 'end3') {

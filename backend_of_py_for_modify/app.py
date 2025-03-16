@@ -1,12 +1,15 @@
 import json
+import os
 import threading
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 import requests
+from utils_for_workflow.grader import GraderUtils
 from config import API_KEY, API_URL, MODEL, DEBUG, HOST, PORT
 from EG_resume import example_resume, error_format
 from classify import classify_resume
+from langchain_community.chat_models import ChatZhipuAI
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -106,6 +109,16 @@ def modify_resume():
         source_language = data.get('source_language')
         target_language = data.get('target_language')
         client_ip = request.remote_addr
+        llm = ChatZhipuAI(
+            api_key=os.getenv("API_KEY"),
+            model=os.getenv("MODEL"),
+            temperature=0.0,
+            api_url=os.getenv("API_URL"),
+            verbose=True,
+            streaming=False
+        )
+        grader = GraderUtils(llm)
+        question_rewriter = grader.create_question_rewriter()
         if requirements :
             prompt = f"""将{resume_text}从{source_language}变成{target_language}，
             修改后的简历需要符合{target_language}的语法和格式，
@@ -117,10 +130,7 @@ def modify_resume():
             修改后的简历需要符合{target_language}的语法和格式，
             格式排版工整合理方便复制粘贴，不要出现任何错误和奇怪的格式标符例如：** _ _ _ ---。 
             除了必要的句号逗号冒号双引号，不要出现其他标符。简历内容修改的漂亮一些。"""
-        messages = [
-            {"role": "system", "content": "你是一个专业的简历修改专家，擅长根据用户的要求修改简历，要求有教育背景、专业，项目经验，技能特长，自我评价，实习经历，竞赛经历，荣誉奖项，其他经历。"},
-            {"role": "user", "content": prompt}
-        ]
+        
         def buffer_generator():
             send_data = ''
             yield f"data: {json.dumps({'type': 'start', 'sourceLanguage': source_language, 'targetLanguage': target_language})}\n\n"
@@ -157,8 +167,19 @@ def modify_resume():
             }
             yield f"data: {json.dumps(response_data)}\n\n"
 
+            question_rewriter_results = question_rewriter.invoke({
+                "input": f"对于{send_data}，请写一个更加具体详细的简历分类，主要看项目经验，技能特长，实习经历，竞赛经历，荣誉奖项，其他经历。分类可以是一个，也可以是多个。"
+            })
+            response_data = {
+                'type': 'end12',
+                'text': question_rewriter_results
+            }
+            yield f"data: {json.dumps(response_data)}\n\n"
 
-
+            messages = [
+            {"role": "system", "content": "你是一个专业的简历修改专家，擅长根据用户的要求修改简历，要求有教育背景、专业，项目经验，技能特长，自我评价，实习经历，竞赛经历，荣誉奖项，其他经历。"},
+            {"role": "user", "content": prompt + f"简历分类：{question_rewriter_results}，修改简历，要求有教育背景、专业，项目经验，技能特长，自我评价，实习经历，竞赛经历，荣誉奖项，其他经历。"}
+        ]
             response = requests.post(
                 API_URL, 
                 headers=headers, 
