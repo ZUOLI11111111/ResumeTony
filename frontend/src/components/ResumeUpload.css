@@ -300,24 +300,51 @@
 
 /* 成功消息 */
 .success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    background-color: #e6f7ee;
-    color: #2d9064;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .success-icon {
-    font-size: 16px;
-    margin-right: 6px;
+    font-size: 18px;
+    margin-right: 8px;
+    color: #28a745;
 }
 
 .saving-indicator {
-    margin-left: 5px;
     font-style: italic;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+/* 分类状态提示 */
+.classifying-status {
+    background-color: #cce5ff;
+    color: #004085;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    animation: pulse 1.5s infinite;
+}
+
+.classifying-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    color: #0275d8;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
 /* 响应式调整 */

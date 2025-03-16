@@ -6,7 +6,7 @@ import openai
 import requests
 from config import API_KEY, API_URL, MODEL, DEBUG, HOST, PORT
 from EG_resume import example_resume, error_format
-
+from classify import classify_resume
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -129,14 +129,45 @@ def modify_resume():
                 "Authorization": f"Bearer {API_KEY}",
                 "Content-Type": "application/json"
             }
-            
+
+            classify_data = classify_resume(resume_text)
+            for line in classify_data.iter_lines():
+                if line:
+                    line = line.decode('utf-8')
+                    if line.startswith('data:'):
+                        line = line[5:].strip()
+                        if line != '[DONE]':
+                            try:
+                                data = json.loads(line)
+                                if 'choices' in data and len(data['choices']) > 0:
+                                    delta = data['choices'][0].get('delta', {})
+                                    content = delta.get('content', '')
+                                    if content:
+                                        send_data += content
+                                        response_data = {
+                                            'type': 'update',
+                                            'text': send_data
+                                        }
+                                        yield f"data: {json.dumps(response_data)}\n\n"
+                            except Exception as e:
+                                print(f"Error parsing line: {line}, Error: {str(e)}")
+            response_data = {
+                'type': 'end1',
+                'text': send_data
+            }
+            yield f"data: {json.dumps(response_data)}\n\n"
+
+
+
             response = requests.post(
                 API_URL, 
                 headers=headers, 
                 json={"model": MODEL, "messages": messages, "stream": True},
-                stream=True
+                stream=True,
+                timeout=20000
             )
-            
+            send_data = ''
+
             for line in response.iter_lines():
                 if line:
                     line = line.decode('utf-8')
@@ -157,11 +188,11 @@ def modify_resume():
                                         yield f"data: {json.dumps(response_data)}\n\n"
                             except Exception as e:
                                 print(f"Error parsing line: {line}, Error: {str(e)}")
-
-            
-
-
-
+            response_data = {
+                'type': 'end2',
+                'text': send_data
+            }
+            yield f"data: {json.dumps(response_data)}\n\n"
             if requirements:
                 message_to_verify = f"""
                 请将及简历:{send_data}根据以下要求：{requirements}修改，
@@ -181,7 +212,8 @@ def modify_resume():
                 API_URL, 
                 headers=headers, 
                 json={"model": MODEL, "messages": messages_to_verify, "stream": True},
-                stream=True
+                stream=True,
+                timeout=30000
             )
             send_data_to_verify = ''
             for line in response_to_verify.iter_lines():
@@ -203,12 +235,9 @@ def modify_resume():
                                         }
                                         yield f"data: {json.dumps(response_data)}\n\n"
                             except Exception as e:
-                                print(f"Error parsing line: {line}, Error: {str(e)}")
-            
-            
-            
+                                print(f"Error parsing line: {line}, Error: {str(e)}")        
             response_data = {
-                'type': 'end',
+                'type': 'end3',
                 'text': send_data
             }
             yield f"data: {json.dumps(response_data)}\n\n"

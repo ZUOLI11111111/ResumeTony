@@ -23,6 +23,7 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
     const [targetLanguage, setTargetLanguage] = useState('中文');
     const [success, setSuccess] = useState('');
     const [isSaving, setIsSaving] = useState(false);
+    const [classifyingStatus, setClassifyingStatus] = useState(''); // 添加分类状态变量
     
     const handleTextChange = (e) => {
         setResumeText(e.target.value);
@@ -36,20 +37,24 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
         setIsModifying(true);
         setModifiedResume(""); // 清空之前的结果
         setSuccess(""); // 清空成功消息
-        
+        setClassifyingStatus(""); 
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 6000000); // 60秒超时
+            
             const response = await fetch(`${apiUrl}/api/modify_resume`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     resume_text: resumeText,
                     requirements: modificationRequirements,
                     source_language: sourceLanguage,
                     target_language: targetLanguage
-                })
+                }),
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             
             if (!response.ok) {
                 throw new Error("服务器响应错误");
@@ -57,45 +62,58 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
             
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
-            let workflow_count = 0;
+            
+            setClassifyingStatus("正在分析简历类型...");
+            
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
                 
                 const text = decoder.decode(value);
-                const events = text.split('\n\n');
+                console.log("收到的原始数据:", text);
                 
-                for (const event of events) {
-                    if (!event.trim()) continue;
-                    
-                    // 提取"data:"后面的JSON
-                    const match = event.match(/^data:\s*(.+)$/m);
-                    if (!match) continue;
-                    
-                    try {
-                        const data = JSON.parse(match[1]);
-                        
-                        if (data.type === 'update') {
-                            setModifiedResume(data.text);
-                        } else if (data.type === 'error') {
-                            setModifiedResume("抱歉，修改过程中出现错误，请稍后再试。");
-                        } else if (data.type === 'end') {
-                            setSuccess("修改成功！");
-                            workflow_count++;
-                            // 修改成功后自动保存到数据库
-                            if (workflow_count === 2){
-                                //saveResultToDatabase(resumeText, data.text, modificationRequirements);
-                                break;
+                const lines = text.split('\n');
+                for (const line of lines) {
+                    if (line.trim().startsWith('data:')) {
+                        try {
+                            const jsonStr = line.substring(5).trim();
+                            console.log("解析前的JSON:", jsonStr);
+                            const data = JSON.parse(jsonStr);
+                            
+                            if (data.type === 'start') {
+                                // 开始处理，设置语言信息
+                                setSourceLanguage(data.sourceLanguage || '中文');
+                                setTargetLanguage(data.targetLanguage || '中文');
+                                setClassifyingStatus("正在分析简历类型...");
+                            } else if (data.type === 'update') {
+                                if (data.text) {
+                                    setModifiedResume(data.text);
+                                }
+                            } else if (data.type === 'end1') {
+                                setClassifyingStatus("简历分类完成，开始修改...");
+                            } else if (data.type === 'end2') {
+                                setClassifyingStatus("简历修改完成，正在优化格式...");
+                            } else if (data.type === 'end3') {
+                                setClassifyingStatus("");
+                                setSuccess("简历修改成功！");
                             }
+                        } catch (error) {
+                            console.error("解析服务器响应出错:", error, line);
+                            setClassifyingStatus(`解析响应出错: ${error.message}`);
                         }
-                    } catch (parseError) {
-                        console.error("解析JSON失败:", parseError, match[1]);
                     }
                 }
             }
         } catch (error) {
             console.error("请求失败:", error);
-            setModifiedResume("抱歉，修改过程中出现错误，请稍后再试。");
+            if (error.name === 'AbortError') {
+                setModifiedResume("请求超时，可能是后端服务处理时间过长。请尝试简化简历内容或使用更简单的要求。");
+            } else if (error.message === 'Failed to fetch' || error.message.includes('network')) {
+                setModifiedResume("网络连接错误。请确认Python后端服务(端口5000)已启动并且可访问。");
+            } else {
+                setModifiedResume("修改过程中出现错误：" + error.message);
+            }
+            setClassifyingStatus("");
         } finally {
             setIsModifying(false);
         }
@@ -227,6 +245,13 @@ function ResumeUpload({ languages, apiUrl, onViewHistory }) {
                         <div className="success-message">
                             <span className="success-icon">✓</span> {success}
                             {isSaving && <span className="saving-indicator"> (保存中...)</span>}
+                        </div>
+                    )}
+                    
+                    {/* 分类状态提示 */}
+                    {classifyingStatus && (
+                        <div className="classifying-status">
+                            <span className="classifying-icon">⏳</span> {classifyingStatus}
                         </div>
                     )}
                     

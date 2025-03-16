@@ -69,7 +69,7 @@ HELP_TEXT = f"""
 
 6. {Colors.BOLD}Python后端问题：{Colors.END}
    - 确保已安装 Python 3.6+ 版本
-   - 检查依赖项: pip install -r backend_of_py_for_mododify/requirements.txt
+   - 检查依赖项: pip install -r backend_of_py_for_modify/requirements.txt
    - 如果遇到模块导入错误，可能需要安装额外的依赖
 
 {Colors.BOLD}命令行选项：{Colors.END}
@@ -126,7 +126,7 @@ class ResumeAppService:
         self.project_root = Path(__file__).parent.absolute()
         self.frontend_dir = self.project_root / 'frontend'
         self.java_backend_dir = self.project_root / 'backend_of_java_for_save'
-        self.python_backend_dir = self.project_root / 'backend_of_py_for_mododify'
+        self.python_backend_dir = self.project_root / 'backend_of_py_for_modify'
         
         self.java_process = None
         self.frontend_process = None

@@ -1,0 +1,4 @@
+cd resume_revision
+./start_java_backend.sh
+./start_py.sh
+./start_frontend.sh
