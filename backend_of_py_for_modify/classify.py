@@ -5,77 +5,85 @@ import requests
 import json
 import re
 
-class MockResponse:
-    """模拟响应对象类，提供iter_lines方法"""
-    def __init__(self, content):
-        self.content = content
-        
-    def iter_lines(self):
-        """模拟流式响应的iter_lines方法"""
-        # 创建一个fake data格式，与真实API响应类似
-        fake_data = {
-            "choices": [
-                {
-                    "delta": {
-                        "content": self.content
-                    }
-                }
-            ]
-        }
-        
-        # 转为JSON然后添加data:前缀
-        fake_line = f"data: {json.dumps(fake_data)}".encode('utf-8')
-        # 只返回一行数据，包含全部内容
-        yield fake_line
-        # 最后返回[DONE]标记
-        yield b"data: [DONE]"
+def is_resume(resume_text):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}"
+    }
+    message = [
+        {"role": "system", "content": "你是一个简历分类专家，现在需要你根据内容，判断这是否是一个简历，返回一个json格式，json格式如下：{'judge': 'yes/no'}。"},
+        {"role": "user", "content": resume_text + "请判断这是否是一个简历，返回一个json格式，json格式如下：{'judge': 'yes/no'}。"}
+    ]
+    request_data = {
+        "model": MODEL,
+        "messages": message,
+        "stream": False
+    }
+    
+    response = requests.post(url=API_URL, headers=headers, json=request_data)
+    judge = response.json()['choices'][0]['message']['content']
+    judge = judge.replace("```json", "").replace("```", "").strip()
+ 
+    try:
+        # 尝试直接解析JSON
+        judge_data = json.loads(judge)
+        if 'judge' in judge_data:
+            return judge_data['judge']
+    except:
+        # 如果JSON解析失败，使用正则表达式
+        match = re.search(r"'judge':\s*'([^']*)'", judge)
+        if match:
+            return match.group(1)
+    
+    # 如果都失败了，返回"no"作为默认值
+    return "no"
 
 def classify_resume(resume_text):
+    # 首先判断是否为简历
+    resume_judge = is_resume(resume_text)
+    if resume_judge == "no":
+        raise ValueError("输入内容不是简历，无法进行职业分类")
+        
+    # 如果是简历，继续进行分类
     headers = {
-                "Authorization": f"Bearer {API_KEY}",
-                "Content-Type": "application/json"
-            }
-    prompt_2_add = example_text_4_java + """这是java工程师的简历"""+ example_text_4_marketing + """这是市场营销的简历""" + example_text_4_electric_engineer + """这是电气工程师的简历"""
-    messages = [
-        {"role": "system", "content": "你是一个专业的简历分类专家。"},
-        {"role": "user", "content": "这是分类的例子：" + prompt_2_add + "请根据这个例子，判断以下简历属于哪种类型：" + resume_text + "请返回json格式，例如：{'type': '求职者想寻找关于java工程师的工作'}"}
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}"
+    }
+    message = [
+        {"role": "system", "content": "你是一个简历分类专家，现在需要你根据简历内容，返回一个json格式，json格式如下：{'job': '目标职业'}。"},
+        {"role": "user", "content": resume_text + "\n" + "请根据简历内容，主要参考项目经历，返回一个json格式，json格式如下：{'job': '目标职业'}。"}
     ]
+    request_data = {
+        "model": MODEL,
+        "messages": message,
+        "stream": False
+    }
     
-    response = requests.post(
-        url = API_URL,
-        headers = headers,
-        json = {"model": MODEL, "messages": messages, "stream": False}
-    )
-    response_data = response.json()
-    
-    # 从API获取的content是字符串，需要解析JSON
-    content_str = response_data['choices'][0]['message']['content']
-    # 尝试解析JSON字符串
+    response = requests.post(url=API_URL, headers=headers, json=request_data)
+    job = response.json()['choices'][0]['message']['content']
+    job = job.replace("```json", "").replace("```", "").strip()
+ 
     try:
-        # 尝试解析整个响应为JSON
-        content_json = json.loads(content_str)
-        if 'type' in content_json:
-            result = content_json['type']
-        else:
-            result = content_str  # 如果没有type字段，返回原始内容
-    except json.JSONDecodeError:
-        # 如果不是合法的JSON，尝试提取包含"type"的部分
-        if "type" in content_str.lower():
-            # 尝试从字符串中提取类型信息
-            type_match = re.search(r"['\"]{1}type['\"]{1}\s*:\s*['\"]{1}(.*?)['\"]{1}", content_str)
-            if type_match:
-                result = type_match.group(1)
-            else:
-                result = content_str
-        else:
-            # 如果无法解析，则返回原始内容
-            result = content_str
+        # 尝试直接解析JSON
+        job_data = json.loads(job)
+        if 'job' in job_data:
+            return job_data['job']
+    except:
+        # 如果JSON解析失败，使用正则表达式
+        match = re.search(r"'job':\s*'([^']*)'", job)
+        if match:
+            return match.group(1)
     
-    # 返回模拟响应对象，而不是直接返回字符串
-    return MockResponse(result)
+    # 如果都失败了，返回一个默认值
+    return "未能识别职业"
 
 if __name__ == "__main__":
-    mock_response = classify_resume(example_resume)
-    # 测试iter_lines方法
-    for line in mock_response.iter_lines():
-        print(line.decode('utf-8'))
+    resume_text = "111"
+    print(is_resume(resume_text))
+    try:
+        job = classify_resume(resume_text)
+        print(f"职业分类结果: {job}")
+    except ValueError as e:
+        print(f"错误: {e}")
+        # 在实际应用中，这里可以记录日志或执行其他错误处理逻辑
+

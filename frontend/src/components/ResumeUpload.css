@@ -368,4 +368,178 @@
     .history-button {
         margin-top: 0;
     }
+}
+
+/* 连接状态样式 */
+.connection-status {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    font-size: 14px;
+}
+
+.connection-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.connection-value {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.connection-value.disconnected {
+    background-color: #f0f0f0;
+    color: #777;
+}
+
+.connection-value.connected {
+    background-color: #e6ffe6;
+    color: #00aa00;
+}
+
+.connection-value.processing {
+    background-color: #e6f7ff;
+    color: #0066cc;
+}
+
+.connection-value.error {
+    background-color: #fff0f0;
+    color: #cc0000;
+}
+
+/* 测试按钮 */
+.test-button {
+    margin-top: 15px;
+    background-color: #ffd89b;
+    color: #8b6914;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.test-button:hover:not(:disabled) {
+    background-color: #ffcc80;
+}
+
+.test-button:disabled {
+    background-color: #f5f5f5;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+/* 错误消息样式 */
+.error-message {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.15);
+    margin: 20px 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.5s ease;
+}
+
+.error-message-header {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-icon {
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.error-message-body {
+    padding: 20px;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    border-left: 5px solid #ff4b2b;
+    background-color: #fff8f8;
+}
+
+.error-message-footer {
+    background-color: #f9f9f9;
+    padding: 12px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.try-again-button {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.try-again-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 75, 43, 0.2);
+}
+
+.connection-error-icon {
+    font-size: 64px;
+    color: #ff4b2b;
+    margin: 0 auto 20px;
+    display: block;
+    text-align: center;
+}
+
+/* 错误消息动画 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 不同类型错误的样式 */
+.connection-error .error-message-header {
+    background: linear-gradient(45deg, #1e3c72, #2a5298);
+}
+
+.connection-error .error-message-body {
+    border-left: 5px solid #2a5298;
+}
+
+.resume-error .error-message-header {
+    background: linear-gradient(45deg, #ff9966, #ff5e62);
+}
+
+.resume-error .error-message-body {
+    border-left: 5px solid #ff5e62;
+}
+
+.close-button {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.close-button:hover {
+    color: white;
+    transform: scale(1.1);
 } 

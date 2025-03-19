@@ -361,6 +361,33 @@ def main():
         print_progress("正在启动Python后端", 0)
         logger.info("准备启动Python后端...")
         
+        # 检查tkinter是否安装
+        logger.info("检查tkinter依赖...")
+        try:
+            import_check = subprocess.run(
+                "python3 -c 'import tkinter'", 
+                shell=True, 
+                stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE
+            )
+            if import_check.returncode != 0:
+                logger.warning("未找到tkinter模块，尝试安装...")
+                try:
+                    # 在Ubuntu/Debian系统上安装tkinter
+                    tkinter_install = subprocess.run(
+                        "sudo apt-get update && sudo apt-get install -y python3-tk",
+                        shell=True,
+                        check=True
+                    )
+                    logger.info("tkinter安装成功")
+                except Exception as e:
+                    logger.error(f"安装tkinter失败: {str(e)}")
+                    logger.error("请手动安装tkinter: 'sudo apt-get install python3-tk'")
+                    if args.python_backend_only:
+                        sys.exit(1)
+        except Exception as e:
+            logger.error(f"检查tkinter时出错: {str(e)}")
+        
         # 检查Python环境
         requirements_path = os.path.join(python_backend_path, "requirements.txt")
         if os.path.exists(requirements_path):

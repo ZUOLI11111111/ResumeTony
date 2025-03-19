@@ -1,4 +1,5 @@
 import asyncio
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 import requests
 import json
 from typing import List, Dict, Any, Optional, Tuple
@@ -9,7 +10,8 @@ import random
 import time
 import os
 from urllib.parse import urlparse
-
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import ZhipuAIEmbeddings
 class ResumeLoader:
     def __init__(self, api_key: Optional[str] = None, search_engine_id: Optional[str] = None, max_results: int = 10):
         self.api_key = api_key 
@@ -199,6 +201,159 @@ class ResumeLoader:
         
         print(f"搜索完成: 找到 {len(templates_content)} 个有效模板")
         return templates_content
+    
+    async def create_vector_store(self, docs) -> 'FAISS':
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=300)
+        texts = text_splitter.split_documents(docs)
+        embedding_model = ZhipuAIEmbeddings(
+            model_name="embedding-2",
+            api_key=os.getenv("API_KEY")
+        )
+        store = FAISS.from_documents(texts, embedding_model)
+        return store
+        
+        
+
+    async def get_retriever_from_templates(self, keywords: List[str]) :
+        if isinstance(keywords, str):
+            keywords = [keywords]
+        print(f"获取模板检索器: {keywords}")
+        templates = []
+        # 处理每个关键词
+        for key in keywords:
+            print(f"处理关键词: {key}")
+            docs = await self.search_and_collect_templates(key)
+            if docs:
+                print(f"找到 {len(docs)} 个文档")
+                templates.extend(docs)
+            else:
+                print(f"未找到文档，继续下一个关键词")
+        if not templates:
+            print("警告: 所有关键词都没有找到文档")
+            # 提供默认模板
+            from langchain_core.documents import Document
+            default_templates = [
+                {"title": "软件工程师简历模板", "content": "姓名：[姓名]\n联系方式：[电话] | [邮箱]\n\n技术技能：\n- 编程语言：Python, Java, JavaScript\n- 框架：Flask, Spring Boot, React\n- 工具：Git, Docker, Kubernetes\n\n工作经验：\n1. [公司名称] - [职位]\n   [日期] - [日期]\n   - 开发并维护核心服务\n   - 优化系统性能，提高响应速度\n   - 参与技术方案设计\n\n教育背景：\n[学校] - [学位]\n[专业], [毕业年份]"},
+                {"title": "数据分析师简历模板", "content": "姓名：[姓名]\n联系方式：[电话] | [邮箱]\n\n技术技能：\n- 数据分析：Python, R, SQL\n- 可视化：Tableau, PowerBI\n- 工具：Excel, Pandas, NumPy\n\n工作经验：\n1. [公司名称] - [职位]\n   [日期] - [日期]\n   - 分析用户行为数据，提供业务洞察\n   - 构建数据模型和报表\n   - 开发自动化分析流程\n\n教育背景：\n[学校] - [学位]\n[专业], [毕业年份]"},
+                {"title": "产品经理简历模板", "content": "姓名：[姓名]\n联系方式：[电话] | [邮箱]\n\n核心能力：\n- 产品规划和路线图设计\n- 用户研究和需求分析\n- 数据驱动决策\n\n工作经验：\n1. [公司名称] - [职位]\n   [日期] - [日期]\n   - 负责产品从构思到发布的全过程\n   - 与设计和开发团队紧密合作\n   - 分析用户反馈持续优化产品\n\n教育背景：\n[学校] - [学位]\n[专业], [毕业年份]"}
+            ]
+            
+            print("使用默认模板作为备选")
+            document_objects = []
+            for template in default_templates:
+                document_objects.append(
+                    Document(
+                        page_content=template['content'],
+                        metadata={"title": template['title']}
+                    )
+                )
+            
+            try:
+                # 使用智谱AI嵌入
+                embeddings = ZhipuAIEmbeddings(
+                    model="embedding-2",
+                    api_key=os.getenv("API_KEY")
+                )
+                
+                # 使用FAISS创建向量存储
+                print("使用默认模板创建向量存储...")
+                vector_store = FAISS.from_documents(document_objects, embeddings)
+                print("默认模板向量存储创建成功!")
+                
+                # 创建检索器
+                retriever = vector_store.as_retriever(search_kwargs={"k": 3})
+                return retriever
+            except Exception as e:
+                print(f"创建默认模板向量存储失败: {e}")
+                dummy_doc = Document(page_content="未找到相关内容", metadata={"title": "无结果"})
+                return [dummy_doc]
+        
+        # 在调用create_vector_store前，显式转换为Document对象
+        from langchain_core.documents import Document
+        document_objects = []
+        for template in templates:
+            if isinstance(template, dict) and 'content' in template and 'title' in template:
+                document_objects.append(
+                    Document(
+                        page_content=template['content'],
+                        metadata={"title": template['title']}
+                    )
+                )
+        
+        print(f"转换了 {len(document_objects)} 个文档对象")
+        
+        # 确保有文档对象
+        if not document_objects:
+            print("警告: 没有有效的文档可以创建向量存储")
+            dummy_doc = Document(page_content="转换后无内容", metadata={"title": "无结果"})
+            return [dummy_doc]
+            
+        # 直接创建FAISS向量存储
+        try:
+            from langchain_community.vectorstores import FAISS
+            from langchain_community.embeddings import ZhipuAIEmbeddings
+            
+            # 使用智谱AI嵌入
+            embeddings = ZhipuAIEmbeddings(
+                model="embedding-2",
+                api_key=os.getenv("API_KEY")
+            )
+            
+            # 使用FAISS创建向量存储
+            print("使用FAISS直接创建向量存储...")
+            vector_store = FAISS.from_documents(document_objects, embeddings)
+            print("FAISS向量存储创建成功!")
+            
+            # 创建检索器并设置搜索参数
+            retriever = vector_store.as_retriever(
+                search_type="similarity", 
+                search_kwargs={"k": 3}
+            )
+            
+            # 测试检索器
+            print("测试检索器...")
+            query = " ".join(keywords[:2] if len(keywords) > 1 else keywords)  # 使用前两个关键词
+            try:
+                # 使用新的invoke方法替代get_relevant_documents
+                test_docs = retriever.invoke(query)
+                print(f"测试检索成功，获取到 {len(test_docs)} 个相关文档")
+                
+                # 打印测试结果
+                for i, doc in enumerate(test_docs[:2]):
+                    preview = doc.page_content[:100] + "..." if len(doc.page_content) > 100 else doc.page_content
+                    print(f"测试结果 {i+1}: {preview}")
+                
+                # 如果没有获取到文档，移除score_threshold以放宽检索条件
+                if len(test_docs) == 0:
+                    print("未获取到文档，移除score_threshold限制...")
+                    retriever = vector_store.as_retriever(
+                        search_type="similarity", 
+                        search_kwargs={"k": 3}
+                    )
+                    test_docs = retriever.invoke(query)
+                    print(f"重新检索，获取到 {len(test_docs)} 个相关文档")
+                
+                return retriever
+            except Exception as e:
+                print(f"检索器测试失败: {e}，重新创建简单检索器")
+                
+                # 创建简单检索器作为备选
+                simple_retriever = vector_store.as_retriever(search_kwargs={"k": 3})
+                try:
+                    test_simple = simple_retriever.invoke(query)
+                    print(f"简单检索器测试成功，获取到 {len(test_simple)} 个相关文档")
+                except Exception as inner_e:
+                    print(f"简单检索器测试失败: {inner_e}")
+                return simple_retriever
+            
+        except Exception as e:
+            print(f"创建FAISS向量存储失败: {e}")
+            import traceback
+            traceback.print_exc()
+            
+            # 如果向量存储失败，返回文档列表作为备选
+            print("返回原始文档列表作为备选")
+            return document_objects
 
 if __name__ == "__main__": 
     key = "自动化测试工程师"
@@ -209,4 +364,3 @@ if __name__ == "__main__":
     print(templates)
    
 
-    
